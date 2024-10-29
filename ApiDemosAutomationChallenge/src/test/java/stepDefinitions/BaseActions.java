@@ -20,7 +20,13 @@ public class BaseActions {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Varsayılan 10 saniye bekleme süresi
     }
-
+    public void clickElement(By ByElement) {
+        try {
+            driver.findElement(ByElement).click();
+        } catch (NoSuchElementException e) {
+            System.out.println("Element bulunamadı: " + e.getMessage());
+        }
+    }
     /**
      * Belirtilen elemente tıklar.
      * @param element WebElement - Tıklanacak element
@@ -35,13 +41,13 @@ public class BaseActions {
 
     /**
      * Belirtilen elemente yazı yazar.
-     * @param element WebElement - Yazı yazılacak element
+     * @param   - Yazı yazılacak element
      * @param text String - Yazılacak metin
      */
-    public void sendKeysToElement(WebElement element, String text) {
+    public void sendKeysToElement(WebElement Element, String text) {
         try {
-            element.clear();
-            element.sendKeys(text);
+            Element.clear();
+            Element.sendKeys(text);
         } catch (NoSuchElementException e) {
             System.out.println("Element bulunamadı: " + e.getMessage());
         }

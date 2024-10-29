@@ -10,11 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverFactory {
 
-    static AppiumDriver driver;
+    static AndroidDriver driver;
     static Properties properties;
     static DesiredCapabilities capabilities;
 
-    public static AppiumDriver initialize_Driver(String browser) {
+    public static AndroidDriver initialize_Driver(String browser) {
         properties = ConfigReader.getProperties();
 
         capabilities = new DesiredCapabilities();
@@ -33,7 +33,7 @@ public class DriverFactory {
             capabilities.setCapability("appActivity", "");
         }
         try {
-            driver = new AppiumDriver(new URL("http://0.0.0.0:4723"), capabilities);
+            driver = new AndroidDriver(new URL("http://0.0.0.0:4723"), capabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +44,7 @@ public class DriverFactory {
         return getDriver();
     }
 
-    public static AppiumDriver getDriver() {
+    public static AndroidDriver getDriver() {
         return driver;
     }
 
