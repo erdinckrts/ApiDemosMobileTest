@@ -13,6 +13,7 @@ public class AppPage {
     WebDriverWait wait;
     ElementHelper elementHelper;
     public By btn_Activity=By.xpath("//android.widget.TextView[@text='Activity']");
+    public By btn_AlertDialogs=By.xpath("//android.widget.TextView[@content-desc='Alert Dialogs']");
 
     public AppPage(AndroidDriver driver){
         this.driver = driver;
@@ -21,5 +22,8 @@ public class AppPage {
     }
     public WebElement get_btn_Activity() {
         return driver.findElement(btn_Activity);
+    }
+    public WebElement get_btn_AlertDialogs() {
+        return driver.findElement(btn_AlertDialogs);
     }
 }

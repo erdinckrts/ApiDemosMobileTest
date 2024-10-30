@@ -8,6 +8,9 @@ import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.List;
+import java.util.Random;
+
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -52,7 +55,18 @@ public class BaseActions {
             System.out.println("Element bulunamadı: " + e.getMessage());
         }
     }
-
+    // Listeden rastgele element bulma
+    public WebElement findRandomElement(List<WebElement> ElementList) {
+        if (ElementList != null && !ElementList.isEmpty()) { // Liste boş değilse
+            Random random = new Random();
+            int randomIndex = random.nextInt(ElementList.size()); // Rastgele bir indeks al
+            WebElement returnElement = ElementList.get(randomIndex); // Rastgele butonu al
+            return returnElement; // Tıklanan butonu döndür
+        } else {
+            System.out.println("Hic element bulunamadi."); // Buton yoksa mesaj ver
+            return null; // Buton yoksa null döndür
+        }
+    }
     /**
      * Ekranı yukarı kaydırır.
      */

@@ -2,7 +2,9 @@ package stepDefinitions;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -69,5 +71,19 @@ public class ApiDemosStepDefinitions {
     @And("Change Right butonuna tıklanır")
     public void changeRightButonunaTıklanır() {
         baseActions.clickElement(customTitlePage.btn_changeRight);
+    }
+
+    @Given("App > Alert Dialogs > List Dialog menüsüne gidilir")
+    public void uygulamaAlertDialogsListDialogMenüsüneGidilir() {
+        baseActions.clickElement(homePage.get_btn_App());
+        baseActions.clickElement((appPage.get_btn_AlertDialogs()));
+    }
+
+    @When("List dialog'dan rastgele bir öğe seçilir")
+    public void listDialogDanRastgeleBirÖğeSeçilir() {
+    }
+
+    @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
+    public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
     }
 }
