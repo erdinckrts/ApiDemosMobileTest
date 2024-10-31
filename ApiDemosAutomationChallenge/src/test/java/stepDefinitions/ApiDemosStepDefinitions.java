@@ -89,7 +89,7 @@ public class ApiDemosStepDefinitions {
 
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
-        //System.out.println("index değeri:"+baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement));
-        //baseActions.searchValueInAlertText(randomElement.getText(),alertDialogPage.getAlertTextAndIndex());
+        System.out.println("index degeri:"+baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement));
+        //System.out.println(randomElement.getText());
     }
 }
