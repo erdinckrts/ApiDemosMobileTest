@@ -20,6 +20,8 @@ public class ApiDemosStepDefinitions {
     WebDriverWait wait;
     ElementHelper elementHelper;
     private WebElement randomElement; // Sınıf düzeyinde tanımlandı
+    String randomElementsText;
+
     HomePage homePage = new HomePage(driver);
     BaseActions baseActions = new BaseActions(driver);
     AppPage appPage =new AppPage(driver);
@@ -71,25 +73,24 @@ public class ApiDemosStepDefinitions {
     public void changeRightButonunaTıklanır() {
         baseActions.clickElement(customTitlePage.btn_changeRight);
     }
-
     @Given("App > Alert Dialogs > List Dialog menüsüne gidilir")
     public void uygulamaAlertDialogsListDialogMenüsüneGidilir() {
         baseActions.clickElement(homePage.get_btn_App());
         baseActions.clickElement((appPage.get_btn_AlertDialogs()));
     }
-
     @When("List dialog'dan rastgele bir öğe seçilir")
     public void listDialogDanRastgeleBirÖğeSeçilir() {
         randomElement =baseActions.findRandomElement(alertDialogPage.getElementListInLinearLayout());
+        randomElementsText=randomElement.getText();
         for (WebElement button : alertDialogPage.getElementListInLinearLayout()) {
             System.out.println(button.getText());
         }
         baseActions.clickElement(randomElement);
     }
-
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
-        System.out.println("index degeri:"+baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement));
-        //System.out.println(randomElement.getText());
+        int actualIndex = baseActions.searchValueInAlertText(randomElementsText,(alertDialogPage.getAlertTextAndIndex()));
+        int expectedIndex=baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement);
+        Assert.assertEquals(actualIndex,expectedIndex,"AlerDialog ekranı buton secim hatası");
     }
 }

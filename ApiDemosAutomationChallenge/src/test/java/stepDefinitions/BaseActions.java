@@ -78,22 +78,22 @@ public class BaseActions {
     }
 
     // Belirli bir değeri 2 boyutlu dizide arama
-    public void searchValueInAlertText(String buttonText, String[][] buttonDatas) {
+    public int searchValueInAlertText(String buttonText, String[][] buttonDatas) {
+        System.out.println("buton uzunlugu "+buttonDatas.length);
         //buttonData = getAlertTextAndIndex(); // Dizi verilerini al
-
         boolean found = false;
         // İki boyutlu dizinin her bir elemanını kontrol et
         for (int i = 0; i < buttonDatas.length; i++) {
-            if (buttonDatas[1][i].equalsIgnoreCase(buttonText)) { // İkinci elemanı kontrol et
-                System.out.println("Bulundu: \"" + buttonText + "\" - Satır: " + i + ", Sütun: 1");
+            if (buttonDatas[i][1].equalsIgnoreCase(buttonText)) {
+                System.out.println("Bulundu: \"" + buttonText + "\" - index: " + (i+1) );
                 found = true;
-                break; // Bulunduğunda döngüden çık
+                return (i+1);
             }
         }
-
         if (!found) {
             System.out.println("Değer bulunamadı: \"" + buttonText + "\"");
         }
+        return 0;
     }
     /**
      * Ekranı yukarı kaydırır.
