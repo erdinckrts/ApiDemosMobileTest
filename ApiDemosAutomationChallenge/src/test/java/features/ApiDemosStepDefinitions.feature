@@ -3,13 +3,13 @@ Feature: ApiDemos Uygulamasi Testleri
   Ozel Baslik aktivitesini dogrulamak istiyorum
   Boylesine metin kutulari ve navigasyon cubugu metinlerinin dogru oldugunu dogrulayabilirim
 
-  Scenario: SENARYO0001 List Dialog Ekran Kontrolu
+  Scenario: SENARYO002 List Dialog Ekran Kontrolu
     Given App > Alert Dialogs > List Dialog menüsüne gidilir
     When List dialog'dan rastgele bir öğe seçilir
     Then Seçilen öğenin sırası ve adı alert mesajında kontrol edilir
 
 
-  Scenario: SENARYO01 Custom Title Ekran Kontrolu
+  Scenario: SENARYO001 Custom Title Ekran Kontrolu
     And App > Activity > Custom Title menusune gidilir
     Then left_textBox metni ile left_navigationBar için "Left is best" değeri geldiği görülür:
     Then right_textBox metni ile right_navigationBar için "Right is always right" değeri geldiği görülür:

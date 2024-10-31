@@ -9,10 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pages.ActivityPage;
-import pages.AppPage;
-import pages.CustomTitlePage;
-import pages.HomePage;
+import pages.*;
 import util.DriverFactory;
 import util.ElementHelper;
 
@@ -22,11 +19,13 @@ public class ApiDemosStepDefinitions {
     AndroidDriver driver=DriverFactory.getDriver();
     WebDriverWait wait;
     ElementHelper elementHelper;
+    private WebElement randomElement; // Sınıf düzeyinde tanımlandı
     HomePage homePage = new HomePage(driver);
     BaseActions baseActions = new BaseActions(driver);
     AppPage appPage =new AppPage(driver);
     ActivityPage activityPage =new ActivityPage(driver);
     CustomTitlePage customTitlePage =new CustomTitlePage(driver);
+    AlertDialogPage alertDialogPage=new AlertDialogPage(driver);
 
     public ApiDemosStepDefinitions(AndroidDriver driver){
         this.driver = driver;
@@ -81,9 +80,16 @@ public class ApiDemosStepDefinitions {
 
     @When("List dialog'dan rastgele bir öğe seçilir")
     public void listDialogDanRastgeleBirÖğeSeçilir() {
+        randomElement =baseActions.findRandomElement(alertDialogPage.getElementListInLinearLayout());
+        for (WebElement button : alertDialogPage.getElementListInLinearLayout()) {
+            System.out.println(button.getText());
+        }
+        baseActions.clickElement(randomElement);
     }
 
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
+        //System.out.println("index değeri:"+baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement));
+        //baseActions.searchValueInAlertText(randomElement.getText(),alertDialogPage.getAlertTextAndIndex());
     }
 }

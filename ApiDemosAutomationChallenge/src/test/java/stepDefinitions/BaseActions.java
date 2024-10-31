@@ -67,6 +67,34 @@ public class BaseActions {
             return null; // Buton yoksa null döndür
         }
     }
+    //verilen elementin eleman listesindeki yerini bulma
+    public int getElementIndexFromList(List<WebElement> ElementList, WebElement targetElement) {
+        for (int i = 0; i < ElementList.size(); i++) {
+            if (ElementList.get(i).equals(targetElement)) {
+                return (i+1); //
+            }
+        }
+        return -1; // Element bulunamazsa -1 döndür
+    }
+
+    // Belirli bir değeri 2 boyutlu dizide arama
+    public void searchValueInAlertText(String buttonText, String[][] buttonDatas) {
+        //buttonData = getAlertTextAndIndex(); // Dizi verilerini al
+
+        boolean found = false;
+        // İki boyutlu dizinin her bir elemanını kontrol et
+        for (int i = 0; i < buttonDatas.length; i++) {
+            if (buttonDatas[1][i].equalsIgnoreCase(buttonText)) { // İkinci elemanı kontrol et
+                System.out.println("Bulundu: \"" + buttonText + "\" - Satır: " + i + ", Sütun: 1");
+                found = true;
+                break; // Bulunduğunda döngüden çık
+            }
+        }
+
+        if (!found) {
+            System.out.println("Değer bulunamadı: \"" + buttonText + "\"");
+        }
+    }
     /**
      * Ekranı yukarı kaydırır.
      */
