@@ -12,7 +12,7 @@ public class HomePage {
     AndroidDriver driver;
     WebDriverWait wait;
     ElementHelper elementHelper;
-    public By btn_App=By.xpath("//android.widget.TextView[@text='App']");
+    public By btn_App=By.xpath("//android.widget.TextView[@content-desc='App']");
     public By btn_Views=By.id("00000000-0000-0bac-ffff-ffff00000014");
 
 

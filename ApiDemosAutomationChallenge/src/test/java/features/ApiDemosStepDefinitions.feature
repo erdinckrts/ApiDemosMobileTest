@@ -3,6 +3,23 @@ Feature: ApiDemos Uygulamasi Testleri
   Ozel Baslik aktivitesini dogrulamak istiyorum
   Boylesine metin kutulari ve navigasyon cubugu metinlerinin dogru oldugunu dogrulayabilirim
 
+  Scenario: SENARYO004 Hide and Show Ekran Kontrolü
+    Given App > Fragment > Hide and Show ekranına gidilir
+    Then Ekranda iki adet Hide düğmesi olduğu kontrol edilir
+    Then Ekranda iki adet metin kutusu olduğunu kontrol edilir
+    And  Birinci Hide butonuna tıklanır
+    Then Birinci metin kutusunun gizlendiği görülür
+    Then Birinci butonun "Show" olarak değiştiği görülür
+    And  Birinci Show butonuna tıklanır
+    Then Birinci metin kutusunun geri geldiğini görülür
+    Then Birinci butonun "Hide" olarak değiştiği görülür
+    And  İkinci Hide butonuna tıklanır
+    Then İkinci metin kutusunun gizlendiği görülür
+    Then İkinci butonun "Show" olarak değiştiği görülür
+    And  İkinci Show butonuna tıklanır
+    Then İkinci metin kutusunun geri geldiğini görülür
+    Then İkinci butonun "Hide" olarak değiştiği görülür
+
 
   Scenario: SENARYO003 Context Menu Ekran Kontrolu
     Given App > Fragment > Context Menu menusune gidilir

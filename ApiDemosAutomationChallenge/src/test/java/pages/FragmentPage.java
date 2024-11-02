@@ -13,7 +13,7 @@ public class FragmentPage {
     WebDriverWait wait;
     ElementHelper elementHelper;
     public By btn_ContextMenu=By.xpath("//android.widget.TextView[@content-desc=\"Context Menu\"]");
-    public By btn_HideAndShow=By.xpath("//android.widget.TextView[@content-desc=\"Hide and Show\"]");
+    public By btn_HideAndShow=By.xpath("//android.widget.TextView[@content-desc='Hide and Show']");
 
 
 

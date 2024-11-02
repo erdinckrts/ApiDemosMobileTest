@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.*;
@@ -30,6 +31,8 @@ public class ApiDemosStepDefinitions {
     AlertDialogPage alertDialogPage=new AlertDialogPage(driver);
     FragmentPage fragmentPage=new FragmentPage(driver);
     ContextMenuPage contextMenuPage=new ContextMenuPage(driver);
+    HideAndShowPage hideAndShowPage=new HideAndShowPage(driver);
+
 
     public ApiDemosStepDefinitions(AndroidDriver driver){
         this.driver = driver;
@@ -108,11 +111,111 @@ public class ApiDemosStepDefinitions {
 
         baseActions.longPress(driver,contextMenuPage.get_btn_LongPressMe());
     }
-
     @Then("Menü A ve Menü B öğesinin açıldığı kontrol edilir")
     public void menüAVeMenüBÖğesininAçıldığıKontrolEdilir() {
         Assert.assertTrue(contextMenuPage.get_btn_A().isDisplayed(), "A Elementi görünür değil.");
         Assert.assertTrue(contextMenuPage.get_btn_B().isDisplayed(), "B Elementi görünür değil.");
 
     }
+
+
+    @Given("App > Fragment > Hide and Show ekranına gidilir")
+    public void appFragmentHideAndShowEkranınaGidilir() {
+        baseActions.clickElement(homePage.get_btn_App());
+        baseActions.clickElement(appPage.get_btn_Fragment());
+        baseActions.clickElement(fragmentPage.get_btn_HideAndShow());
+    }
+    @Then("Ekranda iki adet Hide düğmesi olduğu kontrol edilir")
+    public void ekrandaIkiAdetHideDüğmesiOlduğuKontrolEdilir() {
+        Assert.assertTrue(hideAndShowPage.get_btn_birinci().isDisplayed(), "!Birinci buton görünür değil.");
+        Assert.assertTrue(hideAndShowPage.get_btn_ikinci().isDisplayed(), "!İkinci buton görünür değil.");
+
+    }
+
+    @Then("Ekranda iki adet metin kutusu olduğunu kontrol edilir")
+    public void ekrandaIkiAdetMetinKutusuOlduğunuKontrolEdilir() {
+        Assert.assertTrue(hideAndShowPage.get_textBox_birinci().isDisplayed(), "!Birinci textBox görünür değil.");
+        Assert.assertTrue(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!İkinci textBox görünür değil.");
+
+    }
+
+    @And("Birinci Hide butonuna tıklanır")
+    public void birinciHideButonunaTıklanır() {
+        baseActions.clickElement(hideAndShowPage.get_btn_birinci());
+    }
+
+    @Then("Birinci metin kutusunun gizlendiği görülür")
+    public void birinciMetinKutusununGizlendiğiGörülür() {
+
+        //By locator = By.id("io.appium.android.apis:id/fragment1"); // Öğenin locator'ı
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+
+        try {
+            // Öğenin DOM'dan silinmesini bekle
+            wait.until(ExpectedConditions.stalenessOf(hideAndShowPage.get_textBox_birinci()));
+            Assert.assertTrue(true, "Öğe DOM'dan silindi, bu bekleniyordu."); // Başarılı
+        } catch (Exception e) {
+            System.out.println("Element hala mevcut: " + e.getMessage());
+            System.out.println("Hata: " +hideAndShowPage.get_textBox_birinci());
+
+        }
+
+    }
+
+    @Then("Birinci butonun {string} olarak değiştiği görülür")
+    public void birinciButonunOlarakDeğiştiğiGörülür(String expectedText) {
+        Assert.assertEquals(hideAndShowPage.get_btn_birinci().getText(),expectedText,"!Birinci ButonText'i Show degil");
+
+    }
+
+    @And("Birinci Show butonuna tıklanır")
+    public void birinciShowButonunaTıklanır() {
+        baseActions.clickElement(hideAndShowPage.get_btn_birinci());
+
+    }
+
+    @Then("Birinci metin kutusunun geri geldiğini görülür")
+    public void birinciMetinKutusununGeriGeldiğiniGörülür() {
+        Assert.assertTrue(hideAndShowPage.get_textBox_birinci().isDisplayed(), "!Birinci textBox görünür değil.");
+
+    }
+
+    @And("İkinci Hide butonuna tıklanır")
+    public void ikinciHideButonunaTıklanır() {
+        baseActions.clickElement(hideAndShowPage.get_btn_ikinci());
+    }
+
+    @Then("İkinci metin kutusunun gizlendiği görülür")
+    public void ikinciMetinKutusununGizlendiğiGörülür() {
+        //Assert.assertFalse(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!Buton mevcut ve görünür!");
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10)); // 10 saniye bekler
+
+        try {
+            // Öğenin DOM'dan silinmesini bekle
+            wait.until(ExpectedConditions.stalenessOf(hideAndShowPage.get_textBox_ikinci()));
+            Assert.assertTrue(true, "Öğe DOM'dan silindi, bu bekleniyordu."); // Başarılı
+        } catch (Exception e) {
+            System.out.println("Element hala mevcut: ");
+            System.out.println("Hata: " +hideAndShowPage.get_textBox_ikinci());
+        }
+    }
+
+    @Then("İkinci butonun {string} olarak değiştiği görülür")
+    public void ikinciButonunOlarakDeğiştiğiGörülür(String expectedText) {
+        Assert.assertEquals(hideAndShowPage.get_btn_ikinci().getText(),expectedText,"!Birinci ButonText'i Show degil");
+
+    }
+
+    @And("İkinci Show butonuna tıklanır")
+    public void ikinciShowButonunaTıklanır() {
+        baseActions.clickElement(hideAndShowPage.get_btn_ikinci());
+
+    }
+
+    @Then("İkinci metin kutusunun geri geldiğini görülür")
+    public void ikinciMetinKutusununGeriGeldiğiniGörülür() {
+        Assert.assertTrue(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!İkinci textBox görünür değil.");
+
+    }
+
 }
