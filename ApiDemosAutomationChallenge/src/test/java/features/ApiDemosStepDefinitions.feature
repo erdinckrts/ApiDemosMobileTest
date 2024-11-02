@@ -3,6 +3,15 @@ Feature: ApiDemos Uygulamasi Testleri
   Ozel Baslik aktivitesini dogrulamak istiyorum
   Boylesine metin kutulari ve navigasyon cubugu metinlerinin dogru oldugunu dogrulayabilirim
 
+  Scenario: SENARYO005 Gelen mesaj bildirimini kontrol et
+    Given App > Notification > Incoming Message ekranına gidilir
+    When Show Notification butonuna tıklanır
+    And Bildirim Çubuğu açılır
+    Then Bildirim geldiği görülür
+    And Bildirime tıklanır
+    Then Bildirim detayının açıldığı görülür
+    And Bildirim çubuğundaki metin ile bildirim detayının tutarlı olduğu görülür
+
   Scenario: SENARYO004 Hide and Show Ekran Kontrolü
     Given App > Fragment > Hide and Show ekranına gidilir
     Then Ekranda iki adet Hide düğmesi olduğu kontrol edilir

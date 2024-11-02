@@ -17,7 +17,7 @@ public class HideAndShowPage {
     public By btn_birinci=By.id("io.appium.android.apis:id/frag1hide");
     public By btn_ikinci=By.id("io.appium.android.apis:id/frag2hide");
     public By textBox_birinci=By.id("io.appium.android.apis:id/fragment1");
-    public By textBox_ikinci=By.xpath("(//android.widget.EditText[@content-desc=\"Initial text.\"])[2]");
+    public By textBox_ikinci=By.xpath("(//android.widget.EditText[@content-desc='Initial text.'])[2]");
 
 
 

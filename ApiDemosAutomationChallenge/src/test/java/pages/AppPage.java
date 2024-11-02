@@ -16,7 +16,7 @@ public class AppPage {
     public By btn_Activity=By.xpath("//android.widget.TextView[@text='Activity']");
     public By btn_AlertDialogs=By.xpath("//android.widget.TextView[@content-desc='Alert Dialogs']");
     public By btn_Fragment=By.xpath("//android.widget.TextView[@content-desc='Fragment']");
-    public By btn_Notification=By.id("00000000-0000-0bb1-ffff-ffff00000078");
+    public By btn_Notification=By.xpath("//android.widget.TextView[@content-desc='Notification']");
 
 
     public AppPage(AndroidDriver driver){

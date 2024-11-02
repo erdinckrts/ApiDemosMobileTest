@@ -47,9 +47,22 @@ public class BaseActions {
      */
     public void clickElement(WebElement element) {
         try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
         } catch (NoSuchElementException e) {
             System.out.println("Element bulunamadı: " + e.getMessage());
+        }
+    }
+    public void allowtoAlert(){
+        try {
+            // Alert varsa geçiş yapıp kabul et
+            wait.until(ExpectedConditions.alertIsPresent());
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+            System.out.println("Alert mesajı kabul edildi.");
+        } catch (NoAlertPresentException e) {
+            // Alert yoksa devam et
+            System.out.println("Alert mesajı bulunamadı, devam ediliyor.");
         }
     }
 

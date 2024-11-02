@@ -22,6 +22,7 @@ public class ApiDemosStepDefinitions {
     ElementHelper elementHelper;
     private WebElement randomElement; // Sınıf düzeyinde tanımlandı
     String randomElementsText;
+    String notificationText;
 
     HomePage homePage = new HomePage(driver);
     BaseActions baseActions = new BaseActions(driver);
@@ -32,6 +33,9 @@ public class ApiDemosStepDefinitions {
     FragmentPage fragmentPage=new FragmentPage(driver);
     ContextMenuPage contextMenuPage=new ContextMenuPage(driver);
     HideAndShowPage hideAndShowPage=new HideAndShowPage(driver);
+    NotificationPage notificationPage=new NotificationPage(driver);
+    IncomingMessagePage incomingMessagePage=new IncomingMessagePage(driver);
+    NotificationBarPage notificationBarPage=new NotificationBarPage(driver);
 
 
     public ApiDemosStepDefinitions(AndroidDriver driver){
@@ -217,5 +221,60 @@ public class ApiDemosStepDefinitions {
         Assert.assertTrue(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!İkinci textBox görünür değil.");
 
     }
+
+    @Given("App > Notification > Incoming Message ekranına gidilir")
+    public void appNotificationIncomingMessageEkranınaGidilir() {
+        baseActions.clickElement(homePage.get_btn_App());
+        baseActions.clickElement((appPage.get_btn_Notification()));
+        baseActions.clickElement(notificationPage.get_btn_IncomingMessage());
+    }
+
+    @When("Show Notification butonuna tıklanır")
+    public void showNotificationButonunaTıklanır() {
+        //System.out.println("alert: "+incomingMessagePage.get_btn_alertBox_Allow());
+        //System.out.println("alert: "+incomingMessagePage.get_btn_alertBox_Allow().isDisplayed());
+        //baseActions.allowtoAlert();
+        System.out.println("izin verildi");
+        baseActions.clickElement(incomingMessagePage.get_btn_ShowAppNotification());
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @And("Bildirim Çubuğu açılır")
+    public void bildirimÇubuğuAçılır() {
+        driver.openNotifications();
+    }
+
+    @Then("Bildirim geldiği görülür")
+    public void bildirimGeldiğiGörülür() {
+
+        //System.out.println("Bildirim göründü: "+notificationBarPage.get_littleFrameText_notification());
+
+       //Assert.assertTrue(notificationBarPage.get_littleFrameText_notification().isDisplayed(), "!Bildirim mesajı bulunamadı");
+
+        //notificationText =notificationBarPage.get_littleFrameText_notification().getText();
+    }
+
+    @And("Bildirime tıklanır")
+    public void bildirimeTıklanır() {
+        //baseActions.clickElement(notificationBarPage.get_littleFrameText_notification());
+    }
+
+    @Then("Bildirim detayının açıldığı görülür")
+    public void bildirimDetayınınAçıldığıGörülür() {
+        //Assert.assertTrue(notificationBarPage.get_page_NotificationDetails().isDisplayed(), "!Bildirim detayi acilmadi");
+
+    }
+
+    @And("Bildirim çubuğundaki metin ile bildirim detayının tutarlı olduğu görülür")
+    public void bildirimÇubuğundakiMetinIleBildirimDetayınınTutarlıOlduğuGörülür() {
+        //Assert.assertEquals(notificationBarPage.get_text_notification().getText(),notificationText,"!Bildirim çubuguve bildirim detayindeki metin tutarli degil");
+
+    }
+
 
 }

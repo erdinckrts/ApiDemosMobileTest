@@ -13,7 +13,7 @@ public class NotificationPage {
     WebDriverWait wait;
     ElementHelper elementHelper;
 
-    public By btn_IncomingMessage=By.id("000000000-0000-0bb4-ffff-ffff000000b0");
+    public By btn_IncomingMessage=By.xpath("//android.widget.TextView[@content-desc='IncomingMessage']");
 
 
     public NotificationPage(AndroidDriver driver){
