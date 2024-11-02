@@ -15,8 +15,8 @@ public class Hooks {
     @Before
     public void before() throws IOException {
 
-        //Runtime.getRuntime().exec("adb shell am force-stop io.appium.android.apis");
-        //Runtime.getRuntime().exec("adb shell monkey -p io.appium.android.apis -c android.intent.category.LAUNCHER 1");
+        Runtime.getRuntime().exec("adb shell am force-stop io.appium.android.apis");
+        Runtime.getRuntime().exec("adb shell monkey -p io.appium.android.apis -c android.intent.category.LAUNCHER 1");
 
         String browser = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browser");
         properties = ConfigReader.initialize_Properties();

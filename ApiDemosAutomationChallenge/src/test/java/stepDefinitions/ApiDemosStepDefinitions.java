@@ -36,6 +36,9 @@ public class ApiDemosStepDefinitions {
     NotificationPage notificationPage=new NotificationPage(driver);
     IncomingMessagePage incomingMessagePage=new IncomingMessagePage(driver);
     NotificationBarPage notificationBarPage=new NotificationBarPage(driver);
+    ViewsPage viewsPage=new ViewsPage(driver);
+    TabsPage tabsPage =new TabsPage(driver);
+    ScrollablePage scrollablePage=new ScrollablePage(driver);
 
 
     public ApiDemosStepDefinitions(AndroidDriver driver){
@@ -189,20 +192,6 @@ public class ApiDemosStepDefinitions {
         baseActions.clickElement(hideAndShowPage.get_btn_ikinci());
     }
 
-    @Then("İkinci metin kutusunun gizlendiği görülür")
-    public void ikinciMetinKutusununGizlendiğiGörülür() {
-        //Assert.assertFalse(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!Buton mevcut ve görünür!");
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10)); // 10 saniye bekler
-
-        try {
-            // Öğenin DOM'dan silinmesini bekle
-            wait.until(ExpectedConditions.stalenessOf(hideAndShowPage.get_textBox_ikinci()));
-            Assert.assertTrue(true, "Öğe DOM'dan silindi, bu bekleniyordu."); // Başarılı
-        } catch (Exception e) {
-            System.out.println("Element hala mevcut: ");
-            System.out.println("Hata: " +hideAndShowPage.get_textBox_ikinci());
-        }
-    }
 
     @Then("İkinci butonun {string} olarak değiştiği görülür")
     public void ikinciButonunOlarakDeğiştiğiGörülür(String expectedText) {
@@ -236,11 +225,6 @@ public class ApiDemosStepDefinitions {
         //baseActions.allowtoAlert();
         System.out.println("izin verildi");
         baseActions.clickElement(incomingMessagePage.get_btn_ShowAppNotification());
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -252,16 +236,14 @@ public class ApiDemosStepDefinitions {
     @Then("Bildirim geldiği görülür")
     public void bildirimGeldiğiGörülür() {
 
-        //System.out.println("Bildirim göründü: "+notificationBarPage.get_littleFrameText_notification());
 
-       //Assert.assertTrue(notificationBarPage.get_littleFrameText_notification().isDisplayed(), "!Bildirim mesajı bulunamadı");
+       Assert.assertTrue(notificationBarPage.get_littleFrame_notification().isDisplayed(), "!Bildirim mesajı bulunamadı");
 
-        //notificationText =notificationBarPage.get_littleFrameText_notification().getText();
     }
 
     @And("Bildirime tıklanır")
     public void bildirimeTıklanır() {
-        //baseActions.clickElement(notificationBarPage.get_littleFrameText_notification());
+        baseActions.clickElement(notificationBarPage.get_littleFrameText_notification());
     }
 
     @Then("Bildirim detayının açıldığı görülür")
@@ -277,4 +259,26 @@ public class ApiDemosStepDefinitions {
     }
 
 
+
+
+    @Given("Views > Tabs menu > Scrollable ekranına gidilir")
+    public void viewsTabsMenuScrollableEkranınaGidilir() {
+        baseActions.clickElement(homePage.get_btn_Views());
+        baseActions.scrollUp();
+        baseActions.scrollUp();
+        baseActions.scrollUp();
+        baseActions.clickElement(viewsPage.getBy_btn_Tabs());
+        baseActions.clickElement(tabsPage.getBy_btn_Scrollable());
+    }
+
+    @When("Açılan ekranda son sıradaki Tab'a tıklanır")
+    public void açılanEkrandaSonSıradakiTabATıklanır() {
+        baseActions.swipeTabsUntilVisible(scrollablePage.get_scrollBar_tab(),scrollablePage.get_Bybtn_tabotuz(),driver);
+        baseActions.clickElement(scrollablePage.get_Bybtn_tabotuz());
+    }
+
+    @Then("Açılan sayfanın son sıradaki tab'a ait olduğu doğrulanır")
+    public void açılanSayfanınSonSıradakiTabAAitOlduğuDoğrulanır() {
+        Assert.assertEquals("Content for tab with tag Tab 30",scrollablePage.get_textView_Scrolleble().getText(),"TAB 30 sayfası hatalı");
+    }
 }

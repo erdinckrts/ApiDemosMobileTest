@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import com.google.common.collect.ImmutableList;
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -16,6 +17,7 @@ import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.DriverFactory;
+
 
 import java.util.*;
 
@@ -53,6 +55,48 @@ public class BaseActions {
             System.out.println("Element bulunamadı: " + e.getMessage());
         }
     }
+    //kaydır ve tıkla
+    // Ekranı kaydırıp elemana tıklayan metod
+    public void scrollToElementAndClick(By by) {
+        try {
+            // Elemanı UiScrollable ile kaydırarak görünür hale getirme
+            WebElement element = (WebElement) driver.findElement(
+                    new AppiumBy.ByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true))"
+                            + ".scrollIntoView(new UiSelector().resourceId(\"" + by.toString() + "\"));"));
+
+            // Elemana tıklama işlemi
+            element.click();
+        } catch (Exception e) {
+            System.out.println("Elemente ulaşılamadı veya tıklanamadı: " + e.getMessage());
+        }
+    }
+
+    // By.id ile tanımlı elementi bulana kadar kaydırma ve tıklama
+    public void sscrollToElementAndClick(By by) {
+        boolean isElementFound = false;
+        int maxScrollAttempts = 10; // Maksimum kaydırma deneme sayısı
+        int scrollAttempts = 0;
+
+        while (!isElementFound && scrollAttempts > maxScrollAttempts) {
+            try {
+                // By.id ile elementi bulmayı dene
+                WebElement element = driver.findElement(by);
+                element.click(); // Element bulunduğunda tıkla
+                isElementFound = true; // Element bulunduğunda döngüyü sonlandır
+            } catch (NoSuchElementException e) {
+                // Element yoksa aşağı kaydırma işlemi yap
+                scrollAttempts--;
+                //scrollDown();
+            }
+        }
+
+        if (!isElementFound) {
+            System.out.println("Element bulunamadı.");
+        }
+    }
+
+
+    //bildirim izni
     public void allowtoAlert(){
         try {
             // Alert varsa geçiş yapıp kabul et
@@ -129,13 +173,15 @@ public class BaseActions {
         int startY = (int) (driver.manage().window().getSize().height * 0.8);
         int endY = (int) (driver.manage().window().getSize().height * 0.2);
 
-        Sequence swipe = new Sequence(finger, 0);
-        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
-        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
-        swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), startX, endY));
-        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
+            Sequence swipe = new Sequence(finger, 0);
+            swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY));
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg()));
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), startX, endY));
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg()));
 
-        driver.perform(Arrays.asList(swipe));
+            driver.perform(Arrays.asList(swipe));
+
+
     }
 
     /**
@@ -155,6 +201,55 @@ public class BaseActions {
 
         driver.perform(Arrays.asList(swipe));
     }
+    // Tab'ları sağdan sola sürükle
+    public void swipeTabs(WebElement scrollBar, WebElement ellement, AndroidDriver driver) {
+        int width = driver.manage().window().getSize().width; // Ekranın genişliği
+        int height = driver.manage().window().getSize().height; // Ekranın yüksekliği
+
+        int startX = (int) (width * 0.8); // Başlangıç X koordinatı (sağ)
+        int endX = (int) (width * 0.2); // Bitiş X koordinatı (sol)
+        int startY = scrollBar.getLocation().getY();
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence swipe = new Sequence(finger, 0);
+
+        swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY)); // Başlangıç noktasına git
+        swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg())); // Finger'i aşağı indir
+        swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), endX, startY)); // Sola kaydır
+        swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg())); // Finger'i kaldır
+
+        driver.perform(Arrays.asList(swipe)); // Sürükleme işlemini gerçekleştir
+    }
+    //bulana kadar sağa kaydırma
+    public void swipeTabsUntilVisible(WebElement scrollBar, By byelement, AndroidDriver driver) {
+        WebElement  element1=driver.findElement(byelement);
+        int width = driver.manage().window().getSize().width; // Ekranın genişliği
+        int height = driver.manage().window().getSize().height; // Ekranın yüksekliği
+
+        int startX = (int) (width * 0.8); // Başlangıç X koordinatı (sağ)
+        int endX = (int) (width * 0.2); // Bitiş X koordinatı (sol)
+        int startY = scrollBar.getLocation().getY(); // Kaydırma işlemi için Y koordinatı
+
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+
+        while (!"TAB 30".equals(element1.getText())) { // Element görünene kadar döngü
+
+            Sequence swipe = new Sequence(finger, 0);
+            swipe.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), startX, startY)); // Başlangıç noktasına git
+            swipe.addAction(finger.createPointerDown(PointerInput.MouseButton.MIDDLE.asArg())); // Finger'i aşağı indir
+            swipe.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), endX, startY)); // Sola kaydır
+            swipe.addAction(finger.createPointerUp(PointerInput.MouseButton.MIDDLE.asArg())); // Finger'i kaldır
+
+            driver.perform(Arrays.asList(swipe)); // Sürükleme işlemini gerçekleştir
+            element1=driver.findElement(byelement) ;
+            try {
+                Thread.sleep(500); // Her kaydırma sonrası yarım saniye bekle
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     /**
      * Elementin görünür olup olmadığını kontrol eder.

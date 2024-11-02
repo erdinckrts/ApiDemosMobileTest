@@ -12,7 +12,7 @@ public class NotificationBarPage {
     AndroidDriver driver;
     WebDriverWait wait;
     ElementHelper elementHelper;
-    public By littleFrame_notification=By.id("android:id/notification_main_column");
+    public By littleFrame_notification=By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.view.ViewGroup/android.widget.ScrollView/android.widget.FrameLayout[1]");
     public By littleFrameText_notification=By.xpath("//android.widget.TextView[@class='android.widget.TextView' and @package='com.android.systemui']");
 
 
