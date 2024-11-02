@@ -12,8 +12,8 @@ public class FragmentPage {
     AndroidDriver driver;
     WebDriverWait wait;
     ElementHelper elementHelper;
-    public By btn_ContextMenu=By.id("00000000-0000-0baf-ffff-ffff0000004c");
-    public By btn_HideAndShow=By.id("00000000-0000-0bb2-ffff-ffff0000008d");
+    public By btn_ContextMenu=By.xpath("//android.widget.TextView[@content-desc=\"Context Menu\"]");
+    public By btn_HideAndShow=By.xpath("//android.widget.TextView[@content-desc=\"Hide and Show\"]");
 
 
 

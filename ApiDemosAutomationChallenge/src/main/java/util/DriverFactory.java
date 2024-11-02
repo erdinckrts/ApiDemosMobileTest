@@ -16,12 +16,13 @@ public class DriverFactory {
 
     public static AndroidDriver initialize_Driver(String browser) {
         properties = ConfigReader.getProperties();
-
         capabilities = new DesiredCapabilities();
         if (browser.equals("Android")) {
             capabilities.setCapability("appium:platformName", "Android");
             capabilities.setCapability("appium:udid", "emulator-5554");
             capabilities.setCapability("appium:automationName", "UIAutomator2");
+            //capabilities.setCapability("appium:noReset", "true");
+
             //capabilities.setCapability("app", "C:\\Users\\erdin\\Desktop\\ApiDemos.apk");
             capabilities.setCapability("appium:app", System.getProperty("user.dir") + "/src/test/resources/ApiDemos.apk");
             capabilities.setCapability("appium:appPackage", "io.appium.android.apis");

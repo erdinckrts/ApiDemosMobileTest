@@ -1,23 +1,34 @@
 package stepDefinitions;
 
+import com.google.common.collect.ImmutableList;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.By;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidTouchAction;
+import io.appium.java_client.touch.LongPressOptions;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.List;
-import java.util.Random;
+import util.DriverFactory;
+
+import java.util.*;
 
 
 import java.time.Duration;
-import java.util.Arrays;
+
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
 
 public class BaseActions {
     protected AppiumDriver driver;
     protected WebDriverWait wait;
+
+
 
     public BaseActions(AppiumDriver driver) {
         this.driver = driver;
@@ -55,7 +66,7 @@ public class BaseActions {
             System.out.println("Element bulunamadı: " + e.getMessage());
         }
     }
-    // Listeden rastgele element bulma
+    // Element listesinden rastgele element bulma
     public WebElement findRandomElement(List<WebElement> ElementList) {
         if (ElementList != null && !ElementList.isEmpty()) { // Liste boş değilse
             Random random = new Random();
@@ -95,6 +106,7 @@ public class BaseActions {
         }
         return 0;
     }
+
     /**
      * Ekranı yukarı kaydırır.
      */
@@ -143,6 +155,22 @@ public class BaseActions {
             System.out.println("Element bulunamadı: " + e.getMessage());
             return false;
         }
+    }
+    //Uzun tıklama
+    public void longPress(AndroidDriver driver, WebElement element){
+
+        Point location=element.getLocation();
+        Dimension size=element.getSize();
+        //Point centerOfElement =getCenterOfElement(location,size);
+        PointerInput finger1 =new PointerInput(PointerInput.Kind.TOUCH,"finger1");
+        Sequence sequence = new Sequence(finger1,1);
+
+        sequence.addAction(finger1.createPointerMove(Duration.ZERO,PointerInput.Origin.viewport(), location.x, location.y));
+        sequence.addAction(finger1.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        sequence.addAction(new Pause(finger1, Duration.ofSeconds(2)));
+        sequence.addAction(finger1.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+        driver.perform(Collections.singletonList(sequence));
+
     }
 
     /**

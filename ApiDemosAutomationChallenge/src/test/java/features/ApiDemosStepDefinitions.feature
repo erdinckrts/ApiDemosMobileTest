@@ -3,6 +3,12 @@ Feature: ApiDemos Uygulamasi Testleri
   Ozel Baslik aktivitesini dogrulamak istiyorum
   Boylesine metin kutulari ve navigasyon cubugu metinlerinin dogru oldugunu dogrulayabilirim
 
+
+  Scenario: SENARYO003 Context Menu Ekran Kontrolu
+    Given App > Fragment > Context Menu menusune gidilir
+    When long press me butonuna uzun basılır
+    Then Menü A ve Menü B öğesinin açıldığı kontrol edilir
+
   Scenario: SENARYO002 List Dialog Ekran Kontrolu
     Given App > Alert Dialogs > List Dialog menüsüne gidilir
     When List dialog'dan rastgele bir öğe seçilir

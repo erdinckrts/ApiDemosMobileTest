@@ -28,6 +28,8 @@ public class ApiDemosStepDefinitions {
     ActivityPage activityPage =new ActivityPage(driver);
     CustomTitlePage customTitlePage =new CustomTitlePage(driver);
     AlertDialogPage alertDialogPage=new AlertDialogPage(driver);
+    FragmentPage fragmentPage=new FragmentPage(driver);
+    ContextMenuPage contextMenuPage=new ContextMenuPage(driver);
 
     public ApiDemosStepDefinitions(AndroidDriver driver){
         this.driver = driver;
@@ -67,10 +69,12 @@ public class ApiDemosStepDefinitions {
     }
     @And("Change Left butonuna tıklanır")
     public void changeLeftButonunaTıklanır() {
+
         baseActions.clickElement(customTitlePage.btn_changeLeft);
     }
     @And("Change Right butonuna tıklanır")
     public void changeRightButonunaTıklanır() {
+
         baseActions.clickElement(customTitlePage.btn_changeRight);
     }
     @Given("App > Alert Dialogs > List Dialog menüsüne gidilir")
@@ -92,5 +96,23 @@ public class ApiDemosStepDefinitions {
         int actualIndex = baseActions.searchValueInAlertText(randomElementsText,(alertDialogPage.getAlertTextAndIndex()));
         int expectedIndex=baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement);
         Assert.assertEquals(actualIndex,expectedIndex,"AlerDialog ekranı buton secim hatası");
+    }
+    @Given("App > Fragment > Context Menu menusune gidilir")
+    public void appFragmentContextMenuMenusuneGidilir() {
+        baseActions.clickElement(homePage.get_btn_App());
+        baseActions.clickElement(appPage.get_btn_Fragment());
+        baseActions.clickElement(fragmentPage.get_btn_ContextMenu());
+    }
+    @When("long press me butonuna uzun basılır")
+    public void butonunaUzunBasılır() {
+
+        baseActions.longPress(driver,contextMenuPage.get_btn_LongPressMe());
+    }
+
+    @Then("Menü A ve Menü B öğesinin açıldığı kontrol edilir")
+    public void menüAVeMenüBÖğesininAçıldığıKontrolEdilir() {
+        Assert.assertTrue(contextMenuPage.get_btn_A().isDisplayed(), "A Elementi görünür değil.");
+        Assert.assertTrue(contextMenuPage.get_btn_B().isDisplayed(), "B Elementi görünür değil.");
+
     }
 }
