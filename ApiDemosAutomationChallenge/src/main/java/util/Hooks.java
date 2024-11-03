@@ -15,8 +15,9 @@ public class Hooks {
     @Before
     public void before() throws IOException {
 
-        Runtime.getRuntime().exec("adb shell am force-stop io.appium.android.apis");
-        Runtime.getRuntime().exec("adb shell monkey -p io.appium.android.apis -c android.intent.category.LAUNCHER 1");
+        //restartApp("io.appium.android.apis");
+        //Runtime.getRuntime().exec("adb shell am force-stop io.appium.android.apis");
+        //Runtime.getRuntime().exec("adb shell monkey -p io.appium.android.apis -c android.intent.category.LAUNCHER 1");
 
         String browser = Reporter.getCurrentTestResult().getTestContext().getCurrentXmlTest().getParameter("browser");
         properties = ConfigReader.initialize_Properties();
@@ -26,7 +27,17 @@ public class Hooks {
 
     @After
     public void after() {
-
+        driver.close();
         driver.quit();
+    }
+    public void restartApp(String packageName) {
+        try {
+            // Uygulamayı kapat
+            Runtime.getRuntime().exec("adb shell am force-stop " + packageName);
+            // Uygulamayı başlat
+            Runtime.getRuntime().exec("adb shell monkey -p " + packageName + " -c android.intent.category.LAUNCHER 1");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

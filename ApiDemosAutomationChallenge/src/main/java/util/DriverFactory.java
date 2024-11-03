@@ -21,7 +21,7 @@ public class DriverFactory {
             capabilities.setCapability("appium:platformName", "Android");
             capabilities.setCapability("appium:udid", "emulator-5554");
             capabilities.setCapability("appium:automationName", "UIAutomator2");
-            capabilities.setCapability("appium:noReset", "true");
+            //capabilities.setCapability("appium:noReset", "true");
             capabilities.setCapability("appium:autoGrantPermissions", true);
 
             //capabilities.setCapability("app", "C:\\Users\\erdin\\Desktop\\ApiDemos.apk");
