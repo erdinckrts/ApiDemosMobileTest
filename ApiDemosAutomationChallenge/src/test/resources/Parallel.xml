@@ -4,7 +4,9 @@
     <parameter name="browser"  value="Android"/>
     <test name="AppiumProject">
         <classes>
-            <class name="testRunners.runner"/>
+            <class name="testRunners.runner">
+            </class>
+
         </classes>
     </test>
 </suite>

@@ -401,7 +401,6 @@
   "viewsPage": {
     "btn_Tabs": [
       { "type": "xpath", "value": "//android.widget.TextView[@content-desc='Tabs']" },
-      { "type": "attribute", "attributeName": "elementId", "attributeValue": "00000000-0000-0008-ffff-ffff00000027" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "7" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.TextView" },

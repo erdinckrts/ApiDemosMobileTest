@@ -6,13 +6,9 @@ import util.LocatorFactory;
 
 import java.io.IOException;
 
-public class CustomTitlePage {
-    private AndroidDriver driver;
-    private LocatorFactory locatorFactory;
-
+public class CustomTitlePage extends BasePage{
     public CustomTitlePage(AndroidDriver driver) {
-        this.driver = driver;
-        this.locatorFactory = new LocatorFactory(driver);
+        super(driver);
     }
 
     public By getNavigatorTextLeft() {

@@ -16,9 +16,7 @@ public class LocatorFactory {
     private static JsonNode rootNode;
     static AndroidDriver driver;
 
-    public LocatorFactory(AndroidDriver driver) {
-        this.driver = driver;
-    }
+    public LocatorFactory(AndroidDriver driver) {this.driver = driver;}
 
     // JSON dosyasını yükler ve kök düğümü alır
     static {

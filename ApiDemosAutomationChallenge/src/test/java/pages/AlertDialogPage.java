@@ -10,27 +10,19 @@ import util.LocatorFactory;
 import java.time.Duration;
 import java.util.List;
 
-public class AlertDialogPage {
+public class AlertDialogPage extends BasePage {
     AndroidDriver driver;
-    WebDriverWait wait;
-    ElementHelper elementHelper;
     private String[][] buttonData;
-    private LocatorFactory locatorFactory;
-
 
     public AlertDialogPage(AndroidDriver driver){
+        super(driver);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.elementHelper = new ElementHelper(driver);
-        this.locatorFactory = new LocatorFactory(driver);
-
     }
 
-    By butonlistesi=By.className("android.widget.Button");
+    By actualButtonListClass=By.className("android.widget.Button");
 
 
-
-    public String[][] getExpectedTextAndIndex() {
+    public String[][] getExpectedButtonList() {
         buttonData = new String[][] {
                 {"1", "OK Cancel dialog with a message"},
                 {"2", "OK Cancel dialog with a long message"},
@@ -46,15 +38,12 @@ public class AlertDialogPage {
         };
         return buttonData;
     }
-    /* }
-   public By getListButton() {
-       return locatorFactory.getLocator("alertDialogPage", "list_btn");
-   */
-    public List<WebElement> getElementListInLinearLayout() {
-        return driver.findElements(getListButton());
-    }
-    public By getListButton() {
-        return butonlistesi;
 
+    public List<WebElement> getElementListInLinearLayout() {
+        return driver.findElements(getActualButtonListClass());
     }
+    public By getActualButtonListClass() {
+        return actualButtonListClass;
+    }
+
 }

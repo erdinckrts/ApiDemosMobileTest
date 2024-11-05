@@ -1,5 +1,4 @@
 package stepDefinitions;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -24,7 +23,6 @@ public class ApiDemosStepDefinitions {
     ElementHelper elementHelper;
     private WebElement randomElement; // Sınıf düzeyinde tanımlandı
     String randomElementsText;
-    String notificationText;
 
     HomePage homePage = new HomePage(driver);
     BaseActions baseActions = new BaseActions(driver);
@@ -96,16 +94,14 @@ public class ApiDemosStepDefinitions {
     }
     @When("List dialog'dan rastgele bir öğe seçilir")
     public void listDialogDanRastgeleBirÖğeSeçilir() {
-        randomElement =baseActions.findRandomElement(alertDialogPage.getElementListInLinearLayout());
-        System.out.println("random element: "+randomElement.getText());
+        randomElement =baseActions.findRandomElementWithBy(alertDialogPage.getActualButtonListClass());
         randomElementsText=randomElement.getText();
         baseActions.clickElement(randomElement);
-        System.out.println("random elemente tıklandı");
     }
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
-        int actualIndex = baseActions.searchValueInAlertText(randomElementsText,(alertDialogPage.getExpectedTextAndIndex()));
-        int expectedIndex=baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement);
+        int actualIndex=baseActions.getElementIndexFromList((baseActions.ByToElementList(alertDialogPage.getActualButtonListClass())),randomElement);
+        int expectedIndex=baseActions.getStringIndexFromList(randomElementsText,alertDialogPage.getExpectedButtonList());
         Assert.assertEquals(actualIndex,expectedIndex,"AlerDialog ekranı buton secim hatası");
     }
     @Given("App > Fragment > Context Menu menusune gidilir")
@@ -116,7 +112,6 @@ public class ApiDemosStepDefinitions {
     }
     @When("long press me butonuna uzun basılır")
     public void butonunaUzunBasılır() {
-
         baseActions.longPress(driver,contextMenuPage.getLongPressButton());
     }
     @Then("Menü A ve Menü B öğesinin açıldığı kontrol edilir")
@@ -260,15 +255,12 @@ public class ApiDemosStepDefinitions {
     }
 
 
-
     @Given("Views > Tabs menu > Scrollable ekranına gidilir")
     public void viewsTabsMenuScrollableEkranınaGidilir() {
         baseActions.clickElement(homePage.getViewButton());
-        baseActions.scrollUp();
-        baseActions.scrollUp();
-        baseActions.scrollUp();
+        baseActions.swipeDownsUntilVisible(viewsPage.getBtnTabs(),driver);
         baseActions.clickElement(viewsPage.getBtnTabs());
-        baseActions.clickElement(tabsPage.getScrollBarTab());
+        baseActions.clickElement(tabsPage.getBtnScrollable());
     }
 
     @When("Açılan ekranda son sıradaki Tab'a tıklanır")
