@@ -1,6 +1,7 @@
 package pages;
 
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import util.LocatorFactory;
 
@@ -15,7 +16,10 @@ public class HomePage {
         this.driver = driver;
         this.locatorFactory = new LocatorFactory(driver);
     }
-    public WebElement getAppButton() {
-        return driver.findElement(LocatorFactory.getLocator("homePage", "btn_App"));
+    public By getAppButton() {
+        return locatorFactory.getLocator("homePage", "btn_App");
+    }
+    public By getViewButton() {
+        return locatorFactory.getLocator("homePage", "btn_Views");
     }
 }

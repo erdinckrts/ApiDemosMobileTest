@@ -28,7 +28,6 @@ public class TabsPage {
     }
 
 
-    public By getBy_btn_Scrollable() {
-        return (btn_Scrollable);
-    }
-}
+    public By getScrollBarTab() {
+        return locatorFactory.getLocator("scrollablePage", "scrollBar_tab");
+    }}

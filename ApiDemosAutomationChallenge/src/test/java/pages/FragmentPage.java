@@ -13,11 +13,7 @@ public class FragmentPage {
     AndroidDriver driver;
     WebDriverWait wait;
     ElementHelper elementHelper;
-    public By btn_ContextMenu=By.xpath("//android.widget.TextView[@content-desc=\"Context Menu\"]");
-    public By btn_HideAndShow=By.xpath("//android.widget.TextView[@content-desc='Hide and Show']");
     private LocatorFactory locatorFactory;
-
-
 
 
     public FragmentPage(AndroidDriver driver){
@@ -28,63 +24,63 @@ public class FragmentPage {
 
     }
 
-        public By getAlertDialogLocator() {
+        public By getAlertDialogButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Alert_Dialog");
         }
 
-        public By getArgumentsLocator() {
+        public By getArgumentsButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Arguments");
         }
 
-        public By getContextMenuLocator() {
+        public By getContextMenuButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Context_Menu");
         }
 
-        public By getCustomAnimationsLocator() {
+        public By getCustomAnimationsButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Custom_Animations");
         }
 
-        public By getDialogLocator() {
+        public By getDialogButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Dialog");
         }
 
-        public By getDialogOrActivityLocator() {
+        public By getDialogOrActivityButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Dialog_or_Activity");
         }
 
-        public By getHideAndShowLocator() {
+        public By getHideAndShowButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Hide_and_Show");
         }
 
-        public By getLayoutLocator() {
+        public By getLayoutButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Layout");
         }
 
-        public By getListArrayLocator() {
+        public By getListArrayButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_List_Array");
         }
 
-        public By getMenuLocator() {
+        public By getMenuButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Menu");
         }
 
-        public By getNestingTabsLocator() {
+        public By getNestingTabsButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Nesting_Tabs");
         }
 
-        public By getReceiveResultLocator() {
+        public By getReceiveResultButtonr() {
             return locatorFactory.getLocator("fragmentPage", "btn_Receive_Result");
         }
 
-        public By getRetainInstanceLocator() {
+        public By getRetainInstanceButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Retain_Instance");
         }
 
-        public By getStackLocator() {
+        public By getStackButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Stack");
         }
 
-        public By getTabsLocator() {
+        public By getTabsButton() {
             return locatorFactory.getLocator("fragmentPage", "btn_Tabs");
         }
 

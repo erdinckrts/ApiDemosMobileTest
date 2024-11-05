@@ -13,11 +13,7 @@ public class IncomingMessagePage {
     AndroidDriver driver;
     WebDriverWait wait;
     ElementHelper elementHelper;
-    public By btn_alertBox_Allow=By.xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.Button[1]");
-    public By btn_ShowAppNotification=By.xpath("//android.widget.Button[@content-desc='Show App Notification']");
     private LocatorFactory locatorFactory;
-
-
 
     public IncomingMessagePage(AndroidDriver driver){
         this.driver = driver;
@@ -26,11 +22,11 @@ public class IncomingMessagePage {
         this.locatorFactory = new LocatorFactory(driver);
 
     }
-    public WebElement get_btn_alertBox_Allow() {
-        return driver.findElement(btn_alertBox_Allow);
+    public By getShowNotificationButton() {
+        return LocatorFactory.getLocator("homePage", "btn_Notify_App");
     }
-    public WebElement get_btn_ShowAppNotification() {
-        return driver.findElement(btn_ShowAppNotification);
+    public By getAlertBoxButton() {
+        return LocatorFactory.getLocator("homePage", "btn_Notify_Interstitial");
     }
 
 }

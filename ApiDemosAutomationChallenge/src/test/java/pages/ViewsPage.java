@@ -16,9 +16,6 @@ public class ViewsPage {
     private LocatorFactory locatorFactory;
 
 
-    public By btn_Tabs=By.xpath("//android.widget.TextView[@content-desc=\"Tabs\"]");
-
-
     public ViewsPage(AndroidDriver driver){
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -28,7 +25,6 @@ public class ViewsPage {
     }
 
 
-    public By getBy_btn_Tabs() {
-        return (btn_Tabs);
-    }
-}
+    public By getBtnTabs() {
+        return locatorFactory.getLocator("scrollablePage", "btn_Tabs");
+    }}

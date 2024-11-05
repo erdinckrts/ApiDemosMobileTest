@@ -131,6 +131,15 @@ public class BaseActions {
             System.out.println("Element bulunamadı: " + e.getMessage());
         }
     }
+    public void sendKeysToElement(By ByElement, String text) {
+        WebElement Element=driver.findElement(ByElement);
+        try {
+            Element.clear();
+            Element.sendKeys(text);
+        } catch (NoSuchElementException e) {
+            System.out.println("Element bulunamadı: " + e.getMessage());
+        }
+    }
     // Element listesinden rastgele element bulma
     public WebElement findRandomElement(List<WebElement> ElementList) {
         if (ElementList != null && !ElementList.isEmpty()) { // Liste boş değilse
@@ -318,7 +327,7 @@ public class BaseActions {
             System.out.println("Doğrulama başarısız: Beklenen = " + expected + ", Gerçek = " + actual);
         }
     }
-    public static WebElement translatToElementFromBy(By ByElement) {
+    public static WebElement convertToElementFromBy(By ByElement) {
         return driver.findElement(ByElement);
     }
 

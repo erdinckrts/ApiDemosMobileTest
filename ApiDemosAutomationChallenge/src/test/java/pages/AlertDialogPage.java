@@ -25,9 +25,11 @@ public class AlertDialogPage {
         this.locatorFactory = new LocatorFactory(driver);
 
     }
-    public List<WebElement> getElementListInLinearLayout() {
-        return driver.findElements(getListButton());
-    }
+
+    By butonlistesi=By.className("android.widget.Button");
+
+
+
     public String[][] getExpectedTextAndIndex() {
         buttonData = new String[][] {
                 {"1", "OK Cancel dialog with a message"},
@@ -44,8 +46,15 @@ public class AlertDialogPage {
         };
         return buttonData;
     }
-
+    /* }
+   public By getListButton() {
+       return locatorFactory.getLocator("alertDialogPage", "list_btn");
+   */
+    public List<WebElement> getElementListInLinearLayout() {
+        return driver.findElements(getListButton());
+    }
     public By getListButton() {
-        return locatorFactory.getLocator("alertDialogPage", "list_btn");
+        return butonlistesi;
+
     }
 }

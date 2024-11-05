@@ -13,10 +13,6 @@ public class ScrollablePage {
     AndroidDriver driver;
     WebDriverWait wait;
     ElementHelper elementHelper;
-
-    public By scrollBar_tab=By.id("android:id/tabs");
-    public By btn_tabotuz=By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TabHost/android.widget.LinearLayout/android.widget.HorizontalScrollView/android.widget.TabWidget/android.widget.LinearLayout[5]/android.widget.TextView");
-    public By textView_Scrolleble=By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TabHost/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.TextView");
     private LocatorFactory locatorFactory;
 
 
@@ -29,14 +25,15 @@ public class ScrollablePage {
 
     }
 
+    public By getScrollBarTab() {
+        return locatorFactory.getLocator("scrollablePage", "scrollBar_tab");
+    }
 
-    public WebElement get_scrollBar_tab() {
-        return driver.findElement(scrollBar_tab);
+    public By getTab30Button() {
+        return locatorFactory.getLocator("scrollablePage", "btn_Tab_30");
     }
-    public By get_Bybtn_tabotuz() {
-        return (btn_tabotuz);
-    }
-    public WebElement get_textView_Scrolleble() {
-        return driver.findElement(textView_Scrolleble);
+
+    public By getTab30TextView() {
+        return locatorFactory.getLocator("scrollablePage", "btn_Tab_30_Content");
     }
 }

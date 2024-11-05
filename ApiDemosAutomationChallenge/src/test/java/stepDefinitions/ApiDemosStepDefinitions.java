@@ -60,21 +60,21 @@ public class ApiDemosStepDefinitions {
     }
     @Then("left_textBox metni ile left_navigationBar için {string} değeri geldiği görülür:")
     public void left_textboxMetniIleLeft_navigationBarIçinDeğeriGeldiğiGörülür(String expectedText) {
-        Assert.assertEquals(customTitlePage.get_textBoxLeft().getText(), expectedText,"default left textBox degeri textBox icin hatali");
-        Assert.assertEquals(customTitlePage.get_navigatorBarLeft().getText(), expectedText,"default left textBox degeri navigationBar icin hatali");
+        Assert.assertEquals(baseActions.convertToElementFromBy(customTitlePage.getTextLeft()).getText(), expectedText,"default left textBox degeri textBox icin hatali");
+        Assert.assertEquals(baseActions.convertToElementFromBy(customTitlePage.getNavigatorTextLeft()).getText(), expectedText,"default left textBox degeri navigationBar icin hatali");
     }
     @Then("right_textBox metni ile right_navigationBar için {string} değeri geldiği görülür:")
     public void right_textboxMetniIleRight_navigationBarIçinDeğeriGeldiğiGörülür(String expectedText) {
-        Assert.assertEquals(customTitlePage.get_textBoxRight().getText(), expectedText,"default left textBox değeri textBox için hatalı");
-        Assert.assertEquals(customTitlePage.get_navigatorBarRight().getText(), expectedText,"default left textBox değeri navigationBar için hatalı");
+        Assert.assertEquals(baseActions.convertToElementFromBy(customTitlePage.getTextRight()).getText(), expectedText,"default left textBox değeri textBox için hatalı");
+        Assert.assertEquals(baseActions.convertToElementFromBy(customTitlePage.getNavigatorTextRight()).getText(), expectedText,"default left textBox değeri navigationBar için hatalı");
     }
     @And("Sol textBox alanina {string} yazilir")
     public void solTextBoxAlaninaYazilir(String string) {
-        baseActions.sendKeysToElement(customTitlePage.get_textBoxLeft(),string);
+        baseActions.sendKeysToElement(customTitlePage.getTextLeft(),string);
     }
     @And("sag textBox alanina {string} yazilir")
     public void sagTextBoxAlaninaYazilir(String string) {
-        baseActions.sendKeysToElement(customTitlePage.get_textBoxRight(),string);
+        baseActions.sendKeysToElement(customTitlePage.getTextRight(),string);
     }
     @Then("asagidaki metinlerin guncellendigi kontrol edilir:")
     public void asagidakiMetinlerinGuncellendigiKontrolEdilir() {
@@ -82,12 +82,12 @@ public class ApiDemosStepDefinitions {
     @And("Change Left butonuna tıklanır")
     public void changeLeftButonunaTıklanır() {
 
-        baseActions.clickElement(customTitlePage.btn_changeLeft);
+        baseActions.clickElement(customTitlePage.getBtnChangeLeft());
     }
     @And("Change Right butonuna tıklanır")
     public void changeRightButonunaTıklanır() {
 
-        baseActions.clickElement(customTitlePage.btn_changeRight);
+        baseActions.clickElement(customTitlePage.getBtnChangeRight());
     }
     @Given("App > Alert Dialogs > List Dialog menüsüne gidilir")
     public void uygulamaAlertDialogsListDialogMenüsüneGidilir() {
@@ -97,11 +97,10 @@ public class ApiDemosStepDefinitions {
     @When("List dialog'dan rastgele bir öğe seçilir")
     public void listDialogDanRastgeleBirÖğeSeçilir() {
         randomElement =baseActions.findRandomElement(alertDialogPage.getElementListInLinearLayout());
+        System.out.println("random element: "+randomElement.getText());
         randomElementsText=randomElement.getText();
-        for (WebElement button : alertDialogPage.getElementListInLinearLayout()) {
-            System.out.println(button.getText());
-        }
         baseActions.clickElement(randomElement);
+        System.out.println("random elemente tıklandı");
     }
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
@@ -113,7 +112,7 @@ public class ApiDemosStepDefinitions {
     public void appFragmentContextMenuMenusuneGidilir() {
         baseActions.clickElement(homePage.getAppButton());
         baseActions.clickElement(appPage.getFragmentButton());
-        baseActions.clickElement(fragmentPage.getContextMenuLocator());
+        baseActions.clickElement(fragmentPage.getContextMenuButton());
     }
     @When("long press me butonuna uzun basılır")
     public void butonunaUzunBasılır() {
@@ -122,8 +121,8 @@ public class ApiDemosStepDefinitions {
     }
     @Then("Menü A ve Menü B öğesinin açıldığı kontrol edilir")
     public void menüAVeMenüBÖğesininAçıldığıKontrolEdilir() {
-        Assert.assertTrue(BaseActions.translatToElementFromBy(contextMenuPage.getMenuAButton()).isDisplayed(), "A Elementi görünür değil.");
-        Assert.assertTrue(BaseActions.translatToElementFromBy(contextMenuPage.getMenuBButton()).isDisplayed(), "B Elementi görünür değil.");
+        Assert.assertTrue(BaseActions.convertToElementFromBy(contextMenuPage.getMenuAButton()).isDisplayed(), "A Elementi görünür değil.");
+        Assert.assertTrue(BaseActions.convertToElementFromBy(contextMenuPage.getMenuBButton()).isDisplayed(), "B Elementi görünür değil.");
 
     }
 
@@ -132,25 +131,25 @@ public class ApiDemosStepDefinitions {
     public void appFragmentHideAndShowEkranınaGidilir() {
         baseActions.clickElement(homePage.getAppButton());
         baseActions.clickElement(appPage.getFragmentButton());
-        baseActions.clickElement(fragmentPage.getHideAndShowLocator());
+        baseActions.clickElement(fragmentPage.getHideAndShowButton());
     }
     @Then("Ekranda iki adet Hide düğmesi olduğu kontrol edilir")
     public void ekrandaIkiAdetHideDüğmesiOlduğuKontrolEdilir() {
-        Assert.assertTrue(hideAndShowPage.get_btn_birinci().isDisplayed(), "!Birinci buton görünür değil.");
-        Assert.assertTrue(hideAndShowPage.get_btn_ikinci().isDisplayed(), "!İkinci buton görünür değil.");
+        Assert.assertTrue(baseActions.convertToElementFromBy(hideAndShowPage.getBtnHideFrag1()).isDisplayed(), "!Birinci buton görünür değil.");
+        Assert.assertTrue(baseActions.convertToElementFromBy(hideAndShowPage.getBtnHideFrag2()).isDisplayed(), "!İkinci buton görünür değil.");
 
     }
 
     @Then("Ekranda iki adet metin kutusu olduğunu kontrol edilir")
     public void ekrandaIkiAdetMetinKutusuOlduğunuKontrolEdilir() {
-        Assert.assertTrue(hideAndShowPage.get_textBox_birinci().isDisplayed(), "!Birinci textBox görünür değil.");
-        Assert.assertTrue(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!İkinci textBox görünür değil.");
+        Assert.assertTrue(baseActions.convertToElementFromBy(hideAndShowPage.getTextFragment1()).isDisplayed(), "!Birinci textBox görünür değil.");
+        Assert.assertTrue(baseActions.convertToElementFromBy(hideAndShowPage.getTextFragment2()).isDisplayed(), "!İkinci textBox görünür değil.");
 
     }
 
     @And("Birinci Hide butonuna tıklanır")
     public void birinciHideButonunaTıklanır() {
-        baseActions.clickElement(hideAndShowPage.get_btn_birinci());
+        baseActions.clickElement(hideAndShowPage.getBtnHideFrag1());
     }
 
     @Then("Birinci metin kutusunun gizlendiği görülür")
@@ -161,11 +160,11 @@ public class ApiDemosStepDefinitions {
 
         try {
             // Öğenin DOM'dan silinmesini bekle
-            wait.until(ExpectedConditions.stalenessOf(hideAndShowPage.get_textBox_birinci()));
+            wait.until(ExpectedConditions.stalenessOf(baseActions.convertToElementFromBy(hideAndShowPage.getTextFragment1())));
             Assert.assertTrue(true, "Öğe DOM'dan silindi, bu bekleniyordu."); // Başarılı
         } catch (Exception e) {
             System.out.println("Element hala mevcut: " + e.getMessage());
-            System.out.println("Hata: " +hideAndShowPage.get_textBox_birinci());
+            System.out.println("Hata: " +hideAndShowPage.getTextFragment1());
 
         }
 
@@ -173,43 +172,43 @@ public class ApiDemosStepDefinitions {
 
     @Then("Birinci butonun {string} olarak değiştiği görülür")
     public void birinciButonunOlarakDeğiştiğiGörülür(String expectedText) {
-        Assert.assertEquals(hideAndShowPage.get_btn_birinci().getText(),expectedText,"!Birinci ButonText'i Show degil");
+        Assert.assertEquals(baseActions.convertToElementFromBy(hideAndShowPage.getBtnHideFrag1()).getText(),expectedText,"!Birinci ButonText'i Show degil");
 
     }
 
     @And("Birinci Show butonuna tıklanır")
     public void birinciShowButonunaTıklanır() {
-        baseActions.clickElement(hideAndShowPage.get_btn_birinci());
+        baseActions.clickElement(hideAndShowPage.getBtnHideFrag1());
 
     }
 
     @Then("Birinci metin kutusunun geri geldiğini görülür")
     public void birinciMetinKutusununGeriGeldiğiniGörülür() {
-        Assert.assertTrue(hideAndShowPage.get_textBox_birinci().isDisplayed(), "!Birinci textBox görünür değil.");
+        Assert.assertTrue(baseActions.convertToElementFromBy(hideAndShowPage.getTextFragment1()).isDisplayed(), "!Birinci textBox görünür değil.");
 
     }
 
     @And("İkinci Hide butonuna tıklanır")
     public void ikinciHideButonunaTıklanır() {
-        baseActions.clickElement(hideAndShowPage.get_btn_ikinci());
+        baseActions.clickElement(hideAndShowPage.getBtnHideFrag2());
     }
 
 
     @Then("İkinci butonun {string} olarak değiştiği görülür")
     public void ikinciButonunOlarakDeğiştiğiGörülür(String expectedText) {
-        Assert.assertEquals(hideAndShowPage.get_btn_ikinci().getText(),expectedText,"!Birinci ButonText'i Show degil");
+        Assert.assertEquals(baseActions.convertToElementFromBy(hideAndShowPage.getBtnHideFrag2()).getText(),expectedText,"!Birinci ButonText'i Show degil");
 
     }
 
     @And("İkinci Show butonuna tıklanır")
     public void ikinciShowButonunaTıklanır() {
-        baseActions.clickElement(hideAndShowPage.get_btn_ikinci());
+        baseActions.clickElement(hideAndShowPage.getBtnHideFrag2());
 
     }
 
     @Then("İkinci metin kutusunun geri geldiğini görülür")
     public void ikinciMetinKutusununGeriGeldiğiniGörülür() {
-        Assert.assertTrue(hideAndShowPage.get_textBox_ikinci().isDisplayed(), "!İkinci textBox görünür değil.");
+        Assert.assertTrue(baseActions.convertToElementFromBy(hideAndShowPage.getTextFragment2()).isDisplayed(), "!İkinci textBox görünür değil.");
 
     }
 
@@ -226,7 +225,7 @@ public class ApiDemosStepDefinitions {
         //System.out.println("alert: "+incomingMessagePage.get_btn_alertBox_Allow().isDisplayed());
         //baseActions.allowtoAlert();
         System.out.println("izin verildi");
-        baseActions.clickElement(incomingMessagePage.get_btn_ShowAppNotification());
+        baseActions.clickElement(incomingMessagePage.getShowNotificationButton());
 
     }
 
@@ -239,13 +238,13 @@ public class ApiDemosStepDefinitions {
     public void bildirimGeldiğiGörülür() {
 
 
-       Assert.assertTrue(notificationBarPage.get_littleFrame_notification().isDisplayed(), "!Bildirim mesajı bulunamadı");
+       Assert.assertTrue(baseActions.convertToElementFromBy(notificationBarPage.getShortTextButton()).isDisplayed(), "!Bildirim mesajı bulunamadı");
 
     }
 
     @And("Bildirime tıklanır")
     public void bildirimeTıklanır() {
-        baseActions.clickElement(notificationBarPage.get_littleFrameText_notification());
+        baseActions.clickElement(notificationBarPage.getShortTextButton());
     }
 
     @Then("Bildirim detayının açıldığı görülür")
@@ -262,25 +261,24 @@ public class ApiDemosStepDefinitions {
 
 
 
-
     @Given("Views > Tabs menu > Scrollable ekranına gidilir")
     public void viewsTabsMenuScrollableEkranınaGidilir() {
-        //baseActions.clickElement(homePage.get_btn_Views());
+        baseActions.clickElement(homePage.getViewButton());
         baseActions.scrollUp();
         baseActions.scrollUp();
         baseActions.scrollUp();
-        baseActions.clickElement(viewsPage.getBy_btn_Tabs());
-        baseActions.clickElement(tabsPage.getBy_btn_Scrollable());
+        baseActions.clickElement(viewsPage.getBtnTabs());
+        baseActions.clickElement(tabsPage.getScrollBarTab());
     }
 
     @When("Açılan ekranda son sıradaki Tab'a tıklanır")
     public void açılanEkrandaSonSıradakiTabATıklanır() {
-        baseActions.swipeTabsUntilVisible(scrollablePage.get_scrollBar_tab(),scrollablePage.get_Bybtn_tabotuz(),driver);
-        baseActions.clickElement(scrollablePage.get_Bybtn_tabotuz());
+        baseActions.swipeTabsUntilVisible(baseActions.convertToElementFromBy(scrollablePage.getScrollBarTab()),scrollablePage.getTab30Button(),driver);
+        baseActions.clickElement(scrollablePage.getTab30Button());
     }
 
     @Then("Açılan sayfanın son sıradaki tab'a ait olduğu doğrulanır")
     public void açılanSayfanınSonSıradakiTabAAitOlduğuDoğrulanır() {
-        Assert.assertEquals("Content for tab with tag Tab 30",scrollablePage.get_textView_Scrolleble().getText(),"TAB 30 sayfası hatalı");
+        Assert.assertEquals("Content for tab with tag Tab 30",baseActions.convertToElementFromBy(scrollablePage.getTab30TextView()).getText(),"TAB 30 sayfası hatalı");
     }
 }

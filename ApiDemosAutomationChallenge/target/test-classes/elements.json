@@ -129,34 +129,34 @@
     ]
   },
   "customTitlePage": {
-    "btn_Left_Text": [
+    "navigatorText_Left": [
       { "type": "xpath", "value": "//android.widget.TextView[@content-desc='Left is best']" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/left_text" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Left is best" },
+      { "type": "attribute", "attributeName": "content-desc", "attributeValue": "Left is best" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "0" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.TextView" }
     ],
-    "btn_Right_Text": [
+    "navigatorText_Right": [
       { "type": "xpath", "value": "//android.widget.TextView[@content-desc='Right is always right']" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/right_text" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Right is always right" },
+      { "type": "attribute", "attributeName": "content-desc", "attributeValue": "Right is always right" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "1" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.TextView" }
     ],
-    "btn_Left_Text_Edit": [
+    "text_Left": [
       { "type": "xpath", "value": "//android.widget.EditText[@content-desc='Left is best']" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/left_text_edit" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Left is best" },
+      { "type": "attribute", "attributeName": "content-desc", "attributeValue": "Left is best" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "0" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.EditText" }
     ],
-    "btn_Right_Text_Edit": [
+    "text_Right": [
       { "type": "xpath", "value": "//android.widget.EditText[@content-desc='Right is always right']" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/right_text_edit" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Right is always right" },
+      { "type": "attribute", "attributeName": "content-desc", "attributeValue": "Right is always right" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "0" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.EditText" }
@@ -164,7 +164,7 @@
     "btn_Change_Left": [
       { "type": "xpath", "value": "//android.widget.Button[@content-desc='Change Left']" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/left_text_button" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Change Left" },
+      { "type": "attribute", "attributeName": "content-desc", "attributeValue": "Change Left" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "1" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.Button" }
@@ -172,7 +172,7 @@
     "btn_Change_Right": [
       { "type": "xpath", "value": "//android.widget.Button[@content-desc='Change Right']" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/right_text_button" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Change Right" },
+      { "type": "attribute", "attributeName": "content-desc", "attributeValue": "Change Right" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "1" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
       { "type": "attribute", "attributeName": "class", "attributeValue": "android.widget.Button" }
@@ -259,7 +259,6 @@
     "btn_Hide_Frag1": [
       { "type": "xpath", "value": "(//android.widget.Button[@content-desc='Hide'])[1]" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/frag1hide" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Hide" },
       { "type": "attribute", "attributeName": "elementId", "attributeValue": "00000000-0000-007a-ffff-ffff00000209" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "0" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },
@@ -269,7 +268,6 @@
     "btn_Hide_Frag2": [
       { "type": "xpath", "value": "(//android.widget.Button[@content-desc='Hide'])[2]" },
       { "type": "attribute", "attributeName": "resource-id", "attributeValue": "io.appium.android.apis:id/frag2hide" },
-      { "type": "attribute", "attributeName": "text", "attributeValue": "Hide" },
       { "type": "attribute", "attributeName": "elementId", "attributeValue": "00000000-0000-007a-ffff-ffff0000020e" },
       { "type": "attribute", "attributeName": "index", "attributeValue": "0" },
       { "type": "attribute", "attributeName": "package", "attributeValue": "io.appium.android.apis" },

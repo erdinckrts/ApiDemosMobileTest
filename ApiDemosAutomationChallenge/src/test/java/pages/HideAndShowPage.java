@@ -15,14 +15,7 @@ public class HideAndShowPage {
     WebDriverWait wait;
     ElementHelper elementHelper;
 
-    public By btn_birinci=By.id("io.appium.android.apis:id/frag1hide");
-    public By btn_ikinci=By.id("io.appium.android.apis:id/frag2hide");
-    public By textBox_birinci=By.id("io.appium.android.apis:id/fragment1");
-    public By textBox_ikinci=By.xpath("(//android.widget.EditText[@content-desc='Initial text.'])[2]");
     private LocatorFactory locatorFactory;
-
-
-
 
 
     public HideAndShowPage(AndroidDriver driver){
@@ -32,30 +25,23 @@ public class HideAndShowPage {
         this.locatorFactory = new LocatorFactory(driver);
 
     }
-
-
-    public WebElement get_btn_birinci() {
-        return driver.findElement(btn_birinci);
+    public By getBtnHideFrag1() {
+        return locatorFactory.getLocator("hideAndShowPage", "btn_Hide_Frag1");
     }
-    public WebElement get_btn_ikinci() {
 
-        return driver.findElement(btn_ikinci);
+    // Hide Fragment 2 button elementini döner
+    public By getBtnHideFrag2() {
+        return locatorFactory.getLocator("hideAndShowPage", "btn_Hide_Frag2");
     }
-    public WebElement get_textBox_birinci() {
-       WebElement element;
-        /*try {
-            element = driver.findElement(By.id("io.appium.android.apis:id/fragment1"));
-            // Burada öğe ile bir işlem yapın
-            return element;
-        } catch (StaleElementReferenceException e) {
-            // Hata durumunda öğeyi yeniden bul
-            element = driver.findElement(By.id("io.appium.android.apis:id/fragment1"));
-            return element;
-        }*/
-        return driver.findElement((textBox_birinci));
+
+    // Fragment 1 text elementini döner
+    public By getTextFragment1() {
+        return locatorFactory.getLocator("hideAndShowPage", "text_Fragment_1");
     }
-    public WebElement get_textBox_ikinci() {
-        return driver.findElement(textBox_ikinci);
+
+    // Fragment 2 text elementini döner
+    public By getTextFragment2() {
+        return locatorFactory.getLocator("hideAndShowPage", "text_Fragment_2");
     }
 
 
