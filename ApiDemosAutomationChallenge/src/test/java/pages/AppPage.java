@@ -1,39 +1,88 @@
 package pages;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import util.ElementHelper;
+import io.appium.java_client.android.AndroidDriver;
+import util.LocatorFactory;
 
-
-import java.time.Duration;
+import java.io.IOException;
 
 public class AppPage {
-    AndroidDriver driver;
-    WebDriverWait wait;
-    ElementHelper elementHelper;
-    public By btn_Activity=By.xpath("//android.widget.TextView[@text='Activity']");
-    public By btn_AlertDialogs=By.xpath("//android.widget.TextView[@content-desc='Alert Dialogs']");
-    public By btn_Fragment=By.xpath("//android.widget.TextView[@content-desc='Fragment']");
-    public By btn_Notification=By.xpath("//android.widget.TextView[@content-desc='Notification']");
+    private AndroidDriver driver;
+    private LocatorFactory locatorFactory;
 
-
-    public AppPage(AndroidDriver driver){
+    // Constructor
+    public AppPage(AndroidDriver driver) throws IOException {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.elementHelper = new ElementHelper(driver);
+        this.locatorFactory = new LocatorFactory(driver);
     }
-    public WebElement get_btn_Activity() {
-        return driver.findElement(btn_Activity);
+
+    // Action Bar butonunu döndüren metot
+    public By getActionBarButton() {
+        return locatorFactory.getLocator("appPage", "btn_ActionBar");
     }
-    public WebElement get_btn_AlertDialogs() {
-        return driver.findElement(btn_AlertDialogs);
+
+    // Activity butonunu döndüren metot
+    public By getActivityButton() {
+        return locatorFactory.getLocator("appPage", "btn_Activity");
     }
-    public WebElement get_btn_Fragment() {
-        return driver.findElement(btn_Fragment);
+
+    // Alarm butonunu döndüren metot
+    public By getAlarmButton() {
+        return locatorFactory.getLocator("appPage", "btn_Alarm");
     }
-    public WebElement get_btn_Notification() {
-        return driver.findElement(btn_Notification);
+
+    // Alert Dialogs butonunu döndüren metot
+    public By getAlertDialogsButton() {
+        return locatorFactory.getLocator("appPage", "btn_AlertDialogs");
+    }
+
+    // Device Admin butonunu döndüren metot
+    public By getDeviceAdminButton() {
+        return locatorFactory.getLocator("appPage", "btn_DeviceAdmin");
+    }
+
+    // Fragment butonunu döndüren metot
+    public By getFragmentButton() {
+        return locatorFactory.getLocator("appPage", "btn_Fragment");
+    }
+
+    // Launcher Shortcuts butonunu döndüren metot
+    public By getLauncherShortcutsButton() {
+        return locatorFactory.getLocator("appPage", "btn_LauncherShortcuts");
+    }
+
+    // Loader butonunu döndüren metot
+    public By getLoaderButton() {
+        return locatorFactory.getLocator("appPage", "btn_Loader");
+    }
+
+    // Menu butonunu döndüren metot
+    public By getMenuButton() {
+        return locatorFactory.getLocator("appPage", "btn_Menu");
+    }
+
+    // Notification butonunu döndüren metot
+    public By getNotificationButton() {
+        return locatorFactory.getLocator("appPage", "btn_Notification");
+    }
+
+    // Search butonunu döndüren metot
+    public By getSearchButton() {
+        return locatorFactory.getLocator("appPage", "btn_Search");
+    }
+
+    // Service butonunu döndüren metot
+    public By getServiceButton() {
+        return locatorFactory.getLocator("appPage", "btn_Service");
+    }
+
+    // Text-To-Speech butonunu döndüren metot
+    public By getTextToSpeechButton() {
+        return locatorFactory.getLocator("appPage", "btn_TextToSpeech");
+    }
+
+    // Voice Recognition butonunu döndüren metot
+    public By getVoiceRecognitionButton() {
+        return locatorFactory.getLocator("appPage", "btn_VoiceRecognition");
     }
 }

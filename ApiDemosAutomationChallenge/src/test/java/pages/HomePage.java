@@ -1,30 +1,21 @@
 package pages;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import util.ElementHelper;
 
-import java.time.Duration;
+import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.WebElement;
+import util.LocatorFactory;
+
+import java.io.IOException;
 
 public class HomePage {
-    AndroidDriver driver;
-    WebDriverWait wait;
-    ElementHelper elementHelper;
-    public By btn_App=By.xpath("//android.widget.TextView[@content-desc='App']");
-    public By btn_Views=By.xpath("//android.widget.TextView[@content-desc='Views']");
+    private AndroidDriver driver;
+    private LocatorFactory locatorFactory;
 
 
-    public HomePage(AndroidDriver driver){
+    public HomePage(AndroidDriver driver) throws IOException {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.elementHelper = new ElementHelper(driver);
+        this.locatorFactory = new LocatorFactory(driver);
     }
-    public WebElement get_btn_App() {
-        return driver.findElement(btn_App);
-    }
-    public WebElement get_btn_Views() {
-        return driver.findElement(btn_Views);
+    public WebElement getAppButton() {
+        return driver.findElement(LocatorFactory.getLocator("homePage", "btn_App"));
     }
 }

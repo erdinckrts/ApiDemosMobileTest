@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ElementHelper;
+import util.LocatorFactory;
 
 import java.time.Duration;
 
@@ -16,6 +17,7 @@ public class ScrollablePage {
     public By scrollBar_tab=By.id("android:id/tabs");
     public By btn_tabotuz=By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TabHost/android.widget.LinearLayout/android.widget.HorizontalScrollView/android.widget.TabWidget/android.widget.LinearLayout[5]/android.widget.TextView");
     public By textView_Scrolleble=By.xpath("/hierarchy/android.widget.FrameLayout/android.view.ViewGroup/android.widget.FrameLayout[2]/android.widget.TabHost/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.TextView");
+    private LocatorFactory locatorFactory;
 
 
 
@@ -23,6 +25,8 @@ public class ScrollablePage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.elementHelper = new ElementHelper(driver);
+        this.locatorFactory = new LocatorFactory(driver);
+
     }
 
 

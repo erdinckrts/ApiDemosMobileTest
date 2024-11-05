@@ -3,23 +3,20 @@ package pages;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import util.ElementHelper;
+import util.LocatorFactory;
 
-import java.time.Duration;
+import java.io.IOException;
 
 public class ActivityPage {
-    AndroidDriver driver;
-    WebDriverWait wait;
-    ElementHelper elementHelper;
-    public By btn_CustomTitle=By.xpath("//android.widget.TextView[@text='Custom Title']");
+    private AndroidDriver driver;
+    private LocatorFactory locatorFactory;
 
-    public ActivityPage(AndroidDriver driver){
+    public ActivityPage(AndroidDriver driver) throws IOException {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.elementHelper = new ElementHelper(driver);
+        this.locatorFactory = new LocatorFactory(driver);
     }
-    public WebElement get_btn_CustomTitle() {
-        return driver.findElement(btn_CustomTitle);
+
+    public By getCustomTitleButton() {
+        return locatorFactory.getLocator("activityPage", "btn_CustomTitle");
     }
 }

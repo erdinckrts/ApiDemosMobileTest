@@ -13,7 +13,7 @@
       <module name="ApiDemosAplication" target="18" />
       <module name="AppiumProject" target="8" />
       <module name="HepsiburadaMobil" target="1.5" />
-      <module name="SeleniumGiris" target="11" />
+      <module name="SeleniumGiris" target="14" />
     </bytecodeTargetLevel>
   </component>
 </project>

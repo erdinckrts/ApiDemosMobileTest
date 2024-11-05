@@ -27,7 +27,7 @@ import java.time.Duration;
 import static io.appium.java_client.touch.WaitOptions.waitOptions;
 
 public class BaseActions {
-    protected AppiumDriver driver;
+    protected static AppiumDriver driver;
     protected WebDriverWait wait;
 
 
@@ -51,6 +51,14 @@ public class BaseActions {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
+        } catch (NoSuchElementException e) {
+            System.out.println("Element bulunamadı: " + e.getMessage());
+        }
+    }
+    public void clickElementWithBy(By element) {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            driver.findElement(element).click();
         } catch (NoSuchElementException e) {
             System.out.println("Element bulunamadı: " + e.getMessage());
         }
@@ -265,8 +273,8 @@ public class BaseActions {
         }
     }
     //Uzun tıklama
-    public void longPress(AndroidDriver driver, WebElement element){
-
+    public void longPress(AndroidDriver driver, By Byelement){
+        WebElement element=driver.findElement(Byelement);
         Point location=element.getLocation();
         Dimension size=element.getSize();
         //Point centerOfElement =getCenterOfElement(location,size);
@@ -309,6 +317,9 @@ public class BaseActions {
         } else {
             System.out.println("Doğrulama başarısız: Beklenen = " + expected + ", Gerçek = " + actual);
         }
+    }
+    public static WebElement translatToElementFromBy(By ByElement) {
+        return driver.findElement(ByElement);
     }
 
     /**

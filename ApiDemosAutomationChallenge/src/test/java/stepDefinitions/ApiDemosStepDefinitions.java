@@ -14,6 +14,8 @@ import pages.*;
 import util.DriverFactory;
 import util.ElementHelper;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.Duration;
 
 public class ApiDemosStepDefinitions {
@@ -41,20 +43,20 @@ public class ApiDemosStepDefinitions {
     ScrollablePage scrollablePage=new ScrollablePage(driver);
 
 
-    public ApiDemosStepDefinitions(AndroidDriver driver){
+    public ApiDemosStepDefinitions(AndroidDriver driver) throws IOException, URISyntaxException {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.elementHelper = new ElementHelper(driver);
 
     }
-    public ApiDemosStepDefinitions() {
+    public ApiDemosStepDefinitions() throws IOException, URISyntaxException {
 
     }
     @And("App > Activity > Custom Title menusune gidilir")
     public void appActivityCustomTitleMenusuneGidilir() {
-        baseActions.clickElement(homePage.get_btn_App());
-        baseActions.clickElement(appPage.get_btn_Activity());
-        baseActions.clickElement(activityPage.get_btn_CustomTitle());
+        baseActions.clickElement(homePage.getAppButton());
+        baseActions.clickElement(appPage.getActivityButton());
+        baseActions.clickElement(activityPage.getCustomTitleButton());
     }
     @Then("left_textBox metni ile left_navigationBar için {string} değeri geldiği görülür:")
     public void left_textboxMetniIleLeft_navigationBarIçinDeğeriGeldiğiGörülür(String expectedText) {
@@ -89,8 +91,8 @@ public class ApiDemosStepDefinitions {
     }
     @Given("App > Alert Dialogs > List Dialog menüsüne gidilir")
     public void uygulamaAlertDialogsListDialogMenüsüneGidilir() {
-        baseActions.clickElement(homePage.get_btn_App());
-        baseActions.clickElement((appPage.get_btn_AlertDialogs()));
+        baseActions.clickElement(homePage.getAppButton());
+        baseActions.clickElement((appPage.getAlertDialogsButton()));
     }
     @When("List dialog'dan rastgele bir öğe seçilir")
     public void listDialogDanRastgeleBirÖğeSeçilir() {
@@ -103,34 +105,34 @@ public class ApiDemosStepDefinitions {
     }
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
-        int actualIndex = baseActions.searchValueInAlertText(randomElementsText,(alertDialogPage.getAlertTextAndIndex()));
+        int actualIndex = baseActions.searchValueInAlertText(randomElementsText,(alertDialogPage.getExpectedTextAndIndex()));
         int expectedIndex=baseActions.getElementIndexFromList(alertDialogPage.getElementListInLinearLayout(),randomElement);
         Assert.assertEquals(actualIndex,expectedIndex,"AlerDialog ekranı buton secim hatası");
     }
     @Given("App > Fragment > Context Menu menusune gidilir")
     public void appFragmentContextMenuMenusuneGidilir() {
-        baseActions.clickElement(homePage.get_btn_App());
-        baseActions.clickElement(appPage.get_btn_Fragment());
-        baseActions.clickElement(fragmentPage.get_btn_ContextMenu());
+        baseActions.clickElement(homePage.getAppButton());
+        baseActions.clickElement(appPage.getFragmentButton());
+        baseActions.clickElement(fragmentPage.getContextMenuLocator());
     }
     @When("long press me butonuna uzun basılır")
     public void butonunaUzunBasılır() {
 
-        baseActions.longPress(driver,contextMenuPage.get_btn_LongPressMe());
+        baseActions.longPress(driver,contextMenuPage.getLongPressButton());
     }
     @Then("Menü A ve Menü B öğesinin açıldığı kontrol edilir")
     public void menüAVeMenüBÖğesininAçıldığıKontrolEdilir() {
-        Assert.assertTrue(contextMenuPage.get_btn_A().isDisplayed(), "A Elementi görünür değil.");
-        Assert.assertTrue(contextMenuPage.get_btn_B().isDisplayed(), "B Elementi görünür değil.");
+        Assert.assertTrue(BaseActions.translatToElementFromBy(contextMenuPage.getMenuAButton()).isDisplayed(), "A Elementi görünür değil.");
+        Assert.assertTrue(BaseActions.translatToElementFromBy(contextMenuPage.getMenuBButton()).isDisplayed(), "B Elementi görünür değil.");
 
     }
 
 
     @Given("App > Fragment > Hide and Show ekranına gidilir")
     public void appFragmentHideAndShowEkranınaGidilir() {
-        baseActions.clickElement(homePage.get_btn_App());
-        baseActions.clickElement(appPage.get_btn_Fragment());
-        baseActions.clickElement(fragmentPage.get_btn_HideAndShow());
+        baseActions.clickElement(homePage.getAppButton());
+        baseActions.clickElement(appPage.getFragmentButton());
+        baseActions.clickElement(fragmentPage.getHideAndShowLocator());
     }
     @Then("Ekranda iki adet Hide düğmesi olduğu kontrol edilir")
     public void ekrandaIkiAdetHideDüğmesiOlduğuKontrolEdilir() {
@@ -213,9 +215,9 @@ public class ApiDemosStepDefinitions {
 
     @Given("App > Notification > Incoming Message ekranına gidilir")
     public void appNotificationIncomingMessageEkranınaGidilir() {
-        baseActions.clickElement(homePage.get_btn_App());
-        baseActions.clickElement((appPage.get_btn_Notification()));
-        baseActions.clickElement(notificationPage.get_btn_IncomingMessage());
+        baseActions.clickElement(homePage.getAppButton());
+        baseActions.clickElement((appPage.getNotificationButton()));
+        baseActions.clickElement(notificationPage.getIncomingMessageButton());
     }
 
     @When("Show Notification butonuna tıklanır")
@@ -263,7 +265,7 @@ public class ApiDemosStepDefinitions {
 
     @Given("Views > Tabs menu > Scrollable ekranına gidilir")
     public void viewsTabsMenuScrollableEkranınaGidilir() {
-        baseActions.clickElement(homePage.get_btn_Views());
+        //baseActions.clickElement(homePage.get_btn_Views());
         baseActions.scrollUp();
         baseActions.scrollUp();
         baseActions.scrollUp();

@@ -6,6 +6,7 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ElementHelper;
+import util.LocatorFactory;
 
 import java.time.Duration;
 
@@ -18,6 +19,8 @@ public class HideAndShowPage {
     public By btn_ikinci=By.id("io.appium.android.apis:id/frag2hide");
     public By textBox_birinci=By.id("io.appium.android.apis:id/fragment1");
     public By textBox_ikinci=By.xpath("(//android.widget.EditText[@content-desc='Initial text.'])[2]");
+    private LocatorFactory locatorFactory;
+
 
 
 
@@ -26,6 +29,8 @@ public class HideAndShowPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         this.elementHelper = new ElementHelper(driver);
+        this.locatorFactory = new LocatorFactory(driver);
+
     }
 
 
