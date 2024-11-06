@@ -5,29 +5,24 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import util.ElementHelper;
+import util.LocatorFactory;
 
 import java.time.Duration;
 import java.util.List;
 
-public class AlertDialogPage {
+public class AlertDialogPage extends BasePage {
     AndroidDriver driver;
-    WebDriverWait wait;
-    ElementHelper elementHelper;
     private String[][] buttonData;
-    public By btn_List = By.className("android.widget.Button");
-
-
-
 
     public AlertDialogPage(AndroidDriver driver){
+        super(driver);
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.elementHelper = new ElementHelper(driver);
     }
-    public List<WebElement> getElementListInLinearLayout() {
-        return driver.findElements(btn_List);
-    }
-    public String[][] getAlertTextAndIndex() {
+
+    By actualButtonListClass=By.className("android.widget.Button");
+
+
+    public String[][] getExpectedButtonList() {
         buttonData = new String[][] {
                 {"1", "OK Cancel dialog with a message"},
                 {"2", "OK Cancel dialog with a long message"},
@@ -43,4 +38,12 @@ public class AlertDialogPage {
         };
         return buttonData;
     }
+
+    public List<WebElement> getElementListInLinearLayout() {
+        return driver.findElements(getActualButtonListClass());
+    }
+    public By getActualButtonListClass() {
+        return actualButtonListClass;
+    }
+
 }

@@ -1,39 +1,65 @@
 package pages;
 
-import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import util.ElementHelper;
+import io.appium.java_client.android.AndroidDriver;
+import java.io.IOException;
 
+public class AppPage extends BasePage{
+    public AppPage(AndroidDriver driver) throws IOException {super(driver);}
 
-import java.time.Duration;
-
-public class AppPage {
-    AndroidDriver driver;
-    WebDriverWait wait;
-    ElementHelper elementHelper;
-    public By btn_Activity=By.xpath("//android.widget.TextView[@text='Activity']");
-    public By btn_AlertDialogs=By.xpath("//android.widget.TextView[@content-desc='Alert Dialogs']");
-    public By btn_Fragment=By.xpath("//android.widget.TextView[@content-desc='Fragment']");
-    public By btn_Notification=By.xpath("//android.widget.TextView[@content-desc='Notification']");
-
-
-    public AppPage(AndroidDriver driver){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        this.elementHelper = new ElementHelper(driver);
+    public By getActionBarButton() {
+        return locatorFactory.getLocator("appPage", "btn_ActionBar");
     }
-    public WebElement get_btn_Activity() {
-        return driver.findElement(btn_Activity);
+
+    public By getActivityButton() {
+        return locatorFactory.getLocator("appPage", "btn_Activity");
     }
-    public WebElement get_btn_AlertDialogs() {
-        return driver.findElement(btn_AlertDialogs);
+
+    public By getAlarmButton() {
+        return locatorFactory.getLocator("appPage", "btn_Alarm");
     }
-    public WebElement get_btn_Fragment() {
-        return driver.findElement(btn_Fragment);
+
+    public By getAlertDialogsButton() {
+        return locatorFactory.getLocator("appPage", "btn_AlertDialogs");
     }
-    public WebElement get_btn_Notification() {
-        return driver.findElement(btn_Notification);
+
+    public By getDeviceAdminButton() {
+        return locatorFactory.getLocator("appPage", "btn_DeviceAdmin");
+    }
+
+    public By getFragmentButton() {
+        return locatorFactory.getLocator("appPage", "btn_Fragment");
+    }
+
+    public By getLauncherShortcutsButton() {
+        return locatorFactory.getLocator("appPage", "btn_LauncherShortcuts");
+    }
+
+    public By getLoaderButton() {
+        return locatorFactory.getLocator("appPage", "btn_Loader");
+    }
+
+    public By getMenuButton() {
+        return locatorFactory.getLocator("appPage", "btn_Menu");
+    }
+
+    public By getNotificationButton() {
+        return locatorFactory.getLocator("appPage", "btn_Notification");
+    }
+
+    public By getSearchButton() {
+        return locatorFactory.getLocator("appPage", "btn_Search");
+    }
+
+    public By getServiceButton() {
+        return locatorFactory.getLocator("appPage", "btn_Service");
+    }
+
+    public By getTextToSpeechButton() {
+        return locatorFactory.getLocator("appPage", "btn_TextToSpeech");
+    }
+
+    public By getVoiceRecognitionButton() {
+        return locatorFactory.getLocator("appPage", "btn_VoiceRecognition");
     }
 }
