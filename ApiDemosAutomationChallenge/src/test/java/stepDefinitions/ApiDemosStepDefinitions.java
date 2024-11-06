@@ -4,7 +4,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,7 +21,7 @@ public class ApiDemosStepDefinitions {
     WebDriverWait wait;
     ElementHelper elementHelper;
     private WebElement randomElement; // Sınıf düzeyinde tanımlandı
-    String randomElementsText;
+    String rememberedText;
 
     HomePage homePage = new HomePage(driver);
     BaseActions baseActions = new BaseActions(driver);
@@ -95,13 +94,13 @@ public class ApiDemosStepDefinitions {
     @When("List dialog'dan rastgele bir öğe seçilir")
     public void listDialogDanRastgeleBirÖğeSeçilir() {
         randomElement =baseActions.findRandomElementWithBy(alertDialogPage.getActualButtonListClass());
-        randomElementsText=randomElement.getText();
+        rememberedText=randomElement.getText();
         baseActions.clickElement(randomElement);
     }
     @Then("Seçilen öğenin sırası ve adı alert mesajında kontrol edilir")
     public void seçilenÖğeninSırasıVeAdıAlertMesajındaKontrolEdilir() {
         int actualIndex=baseActions.getElementIndexFromList((baseActions.ByToElementList(alertDialogPage.getActualButtonListClass())),randomElement);
-        int expectedIndex=baseActions.getStringIndexFromList(randomElementsText,alertDialogPage.getExpectedButtonList());
+        int expectedIndex=baseActions.getStringIndexFromList(rememberedText,alertDialogPage.getExpectedButtonList());
         Assert.assertEquals(actualIndex,expectedIndex,"AlerDialog ekranı buton secim hatası");
     }
     @Given("App > Fragment > Context Menu menusune gidilir")
@@ -216,10 +215,7 @@ public class ApiDemosStepDefinitions {
 
     @When("Show Notification butonuna tıklanır")
     public void showNotificationButonunaTıklanır() {
-        //System.out.println("alert: "+incomingMessagePage.get_btn_alertBox_Allow());
-        //System.out.println("alert: "+incomingMessagePage.get_btn_alertBox_Allow().isDisplayed());
-        //baseActions.allowtoAlert();
-        System.out.println("izin verildi");
+
         baseActions.clickElement(incomingMessagePage.getShowNotificationButton());
 
     }
@@ -227,14 +223,12 @@ public class ApiDemosStepDefinitions {
     @And("Bildirim Çubuğu açılır")
     public void bildirimÇubuğuAçılır() {
         driver.openNotifications();
+        rememberedText=baseActions.convertToElementFromBy(notificationBarPage.getShortTextButton()).getText();
     }
 
     @Then("Bildirim geldiği görülür")
     public void bildirimGeldiğiGörülür() {
-
-
        Assert.assertTrue(baseActions.convertToElementFromBy(notificationBarPage.getShortTextButton()).isDisplayed(), "!Bildirim mesajı bulunamadı");
-
     }
 
     @And("Bildirime tıklanır")
@@ -244,13 +238,13 @@ public class ApiDemosStepDefinitions {
 
     @Then("Bildirim detayının açıldığı görülür")
     public void bildirimDetayınınAçıldığıGörülür() {
-        //Assert.assertTrue(notificationBarPage.get_page_NotificationDetails().isDisplayed(), "!Bildirim detayi acilmadi");
+        Assert.assertTrue(baseActions.convertToElementFromBy(notificationBarPage.getDetailText()).isDisplayed(), "!Bildirim detayi acilmadi");
 
     }
 
     @And("Bildirim çubuğundaki metin ile bildirim detayının tutarlı olduğu görülür")
     public void bildirimÇubuğundakiMetinIleBildirimDetayınınTutarlıOlduğuGörülür() {
-        //Assert.assertEquals(notificationBarPage.get_text_notification().getText(),notificationText,"!Bildirim çubuguve bildirim detayindeki metin tutarli degil");
+        Assert.assertEquals(baseActions.convertToElementFromBy(notificationBarPage.getDetailText()).getText(),rememberedText,"!Bildirim çubugu ve bildirim detayindeki metin tutarli degil");
 
     }
 
